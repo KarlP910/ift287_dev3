@@ -1,0 +1,1 @@
+DROP TABLE reservation,client,chambre,commodite,service;

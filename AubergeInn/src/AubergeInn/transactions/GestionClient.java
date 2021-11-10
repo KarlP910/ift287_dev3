@@ -52,11 +52,12 @@ public class GestionClient {
             throws SQLException,IFT287Exception,Exception
     {
         try{
+            Client clients=client.getClient(idClient);
             //Vérifie si le client est déjà dans la base de données
             if(!client.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" n'existe pas.");
             //if(client.get PROBLEME POTENTIEL DE BD
-            if(reserv.getReservationClient(idClient) != null){
+            if(reserv.getReservationClient(clients) != null){
                 throw new IFT287Exception("Le client "+idClient+" a encore des réservations.");
             }
             client.supprimerClient(idClient);

@@ -50,9 +50,10 @@ public class GestionChambre {
     public void supprimerChambre(int idChambre) //a revoir pour commodite et reserv
             throws SQLException, IFT287Exception, Exception{
         try{
+            Chambre chambres=chambre.getChambre(idChambre);
             if(!chambre.existe(idChambre))
                 throw new IFT287Exception("La chambre n'existe pas: "+idChambre);
-            if(reserv.getReservationChambre(idChambre) != null){
+            if(reserv.getReservationChambre(chambres) != null){
                 throw new IFT287Exception("La chambre "+idChambre+" a encore des réservations.");
             }
 

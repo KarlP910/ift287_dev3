@@ -1,5 +1,6 @@
 package AubergeInn.transactions;
 
+import AubergeInn.AubergeInn;
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
 import AubergeInn.tables.Chambre;
@@ -18,7 +19,11 @@ public class GestionReservation {
     private Client client;
     private Chambre chambre;
 
-    public GestionReservation(Reservations reservation,Chambre chambre,Client client){
+    public GestionReservation(Reservations reservation,Chambre chambre,Client client) throws IFT287Exception{
+
+        if (chambre.getConnexion() != client.getConnexion() || reservation.getConnexion() != client.getConnexion())
+            throw new IFT287Exception (
+                    "Les collections d'objets n'utilisent pas la même connexion au serveur");
         this.reservation=reservation;
         this.chambre=chambre;
         this.client=client;
@@ -54,13 +59,14 @@ public class GestionReservation {
             throws SQLException, IFT287Exception,Exception
     {
         try{
+            cx.demarreTransaction();
             Reservation reservation = this.reservation.getReservation(idChambre, dateDebut, dateFin);
             if(dateDebut.after(dateFin))
                 throw new IFT287Exception("La date de la reservation n'est pas valide.");
             if(reservation != null)
                 throw new IFT287Exception("Il y a un conflit avec une autre reservation");
 
-            this.reservation.reserver(idClient,idChambre,dateDebut,dateFin);
+           // this.reservation.reserver(idClient,idChambre,dateDebut,dateFin);
 
             //Commit
             cx.commit();

@@ -17,14 +17,17 @@ public class Reservations {
     private TypedQuery<Reservation> stmtExiste;
     private TypedQuery<Reservation> stmtExisteChambre;
     private TypedQuery<Reservation> stmtExisteClient;
+    private TypedQuery<Reservation> stmtExisteReservation;
     private final Connexion cx;
 
         public Reservations(Connexion cx) throws SQLException
         {
+            //pt verif sur reserv
             this.cx=cx;
             stmtExiste = cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre and r.m_client = : client", Reservation.class);
             stmtExisteChambre = cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre", Reservation.class);
             stmtExisteClient = cx.getConnection().createQuery("select r from Reservation r where r.m_client = :client", Reservation.class);
+            stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre and r.m_date_debut <= :date and r.m_date_fin >:date", Reservation.class);
 
 
         }
@@ -41,15 +44,12 @@ public class Reservations {
         return !stmtExiste.getResultList().isEmpty();
     }
 
-    public void reserver(int idClient, int idChambre, Date dateDebut, Date dateFin) throws SQLException
+    public void reserver(Reservation r) throws SQLException
     {
         /* Ajout de la reservation. */
-        stmtInsertReservation.setInt(1, idClient);
-        stmtInsertReservation.setInt(2, idChambre);
-        stmtInsertReservation.setDate(3, dateDebut);
-        stmtInsertReservation.setDate(4, dateFin);
-        stmtInsertReservation.executeUpdate();
+      cx.getConnection().persist(r);
     }
+    /**
     public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
     {
 
@@ -71,48 +71,32 @@ public class Reservations {
     /**
      * Lecture de la réservation d'une chambre
      */
-    public Reservation getReservationChambre(int idChambre) throws SQLException
+    public List<Reservation> getReservationChambre(Chambre chambre) throws SQLException
     {
-        stmtExisteChambre.setInt(1, idChambre);
-        ResultSet rset = stmtExisteChambre.executeQuery();
-        if (rset.next())
+        stmtExisteChambre.setParameter(1, chambre);
+        List<Reservation> reservations = stmtExisteChambre.getResultList();
+        if(!reservations.isEmpty())
         {
-            Reservation reservation = new Reservation();
-            reservation.setIdClient(rset.getInt(1));
-            reservation.setIdChambre(rset.getInt(2));
-            reservation.setDate_debut(rset.getDate(3));
-            reservation.setDate_fin(rset.getDate(4));
-            return reservation;
+            return reservations;
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
     /**
      * Lecture de la réservation d'un client
      */
-    public Reservation getReservationClient(int idClient) throws SQLException
+    public List<Reservation> getReservationClient(Client client) throws SQLException
     {
-        stmtExisteClient.setInt(1, idClient);
-        ResultSet rset = stmtExisteClient.executeQuery();
-        if (rset.next())
+        stmtExisteClient.setParameter(1, client);
+        List<Reservation> reservations = stmtExisteClient.getResultList();
+        if(!reservations.isEmpty())
         {
-            Reservation reservation = new Reservation();
-            reservation.setIdClient(rset.getInt(1));
-            reservation.setIdChambre(rset.getInt(2));
-            reservation.setDate_debut(rset.getDate(3));
-            reservation.setDate_fin(rset.getDate(4));
-            return reservation;
+            return reservations;
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
     /**
      * Lecture d'une liste de reservation de client
-     */
+
     public List<Reservation> listeReservationClient(int idClient) throws SQLException
     {
         stmtExisteClient.setInt(1, idClient);
@@ -131,6 +115,7 @@ public class Reservations {
        rset.close();
         return listeReserv;
     }
+
     public ArrayList<Integer> getAllChambre(Date date) throws SQLException
     {
         ArrayList<Integer> listeChambre= new ArrayList<Integer>();
@@ -147,6 +132,7 @@ public class Reservations {
         rset.close();
         return listeChambre;
     }
+     */
 }
 
 

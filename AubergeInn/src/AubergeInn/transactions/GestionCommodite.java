@@ -2,22 +2,19 @@ package AubergeInn.transactions;
 
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
-import AubergeInn.tables.Chambre;
 import AubergeInn.tables.Commodite;
-import AubergeInn.tables.Reservation;
-import AubergeInn.tuples.TupleChambre;
+import AubergeInn.tables.Reservations;
 import AubergeInn.tuples.TupleCommodite;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GestionCommodite {
 
     private Connexion cx;
     private Commodite commodite;
-    private Reservation reserv;
+    private Reservations reserv;
 
-    public GestionCommodite(Commodite commodite, Reservation reserv){
+    public GestionCommodite(Commodite commodite, Reservations reserv){
         this.commodite=commodite;
         this.reserv=reserv;
         this.cx=commodite.getConnexion();

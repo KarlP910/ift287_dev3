@@ -1,8 +1,6 @@
 package AubergeInn;
 
-import AubergeInn.IFT287Exception;
 import AubergeInn.tables.*;
-import AubergeInn.Connexion;
 import AubergeInn.transactions.GestionChambre;
 import AubergeInn.transactions.GestionClient;
 import AubergeInn.transactions.GestionCommodite;
@@ -17,7 +15,7 @@ public class GestionSystem {
     private Chambre chambre;
     private Client client;
     private Commodite commodite;
-    private Reservation reservation;
+    private Reservations reservations;
     private Service service;
     private GestionChambre gestionChambre;
     private GestionClient gestionClient;
@@ -33,7 +31,7 @@ public class GestionSystem {
         chambre = new Chambre(cx);
         client = new Client(cx);
         commodite = new Commodite(cx);
-        reservation = new Reservation(cx);
+        reservations = new Reservations(cx);
         service=new Service(cx);
 
         // Verifier les arguments passer dans les setter, argument bidon pour l'instant
@@ -41,10 +39,10 @@ public class GestionSystem {
         //**************************************************************************
         //TODO
         //TODO
-        setGestionChambre(new GestionChambre(chambre,reservation,commodite,service));
-        setGestionClient(new GestionClient(client,reservation));
-        setGestionCommodite(new GestionCommodite(commodite,reservation));
-        setGestionReservation(new GestionReservation(reservation,chambre,client));
+        setGestionChambre(new GestionChambre(chambre, reservations,commodite,service));
+        setGestionClient(new GestionClient(client, reservations));
+        setGestionCommodite(new GestionCommodite(commodite, reservations));
+        setGestionReservation(new GestionReservation(reservations,chambre,client));
 
     }
 

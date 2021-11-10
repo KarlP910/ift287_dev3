@@ -16,11 +16,11 @@ public class GestionChambre {
 
     private Connexion cx;
     private Chambre chambre;
-    private Reservation reserv;
+    private Reservations reserv;
     private Commodite commodite;
     private Service service;
 
-    public GestionChambre(Chambre chambre, Reservation reserv, Commodite commodite,Service service){
+    public GestionChambre(Chambre chambre, Reservations reserv, Commodite commodite, Service service){
         this.chambre=chambre;
         this.reserv=reserv;
         this.cx=chambre.getConnexion();

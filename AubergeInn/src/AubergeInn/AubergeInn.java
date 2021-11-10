@@ -5,7 +5,6 @@
 package AubergeInn;
 
 import AubergeInn.tuples.*;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.io.*;
 import java.text.ParseException;
@@ -243,7 +242,7 @@ public class AubergeInn
                 else if (command.equals("afficherClient")) {
                     int idClient=readInt(tokenizer);
                     TupleClient client= gestionSystem.getGestionClient().afficherClient(idClient);
-                    List<TupleReservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(idClient);
+                    List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(idClient);
 
                     System.out.println("\nidClient\tprenom\tnom\tage\tdate début\tdate départ");
                     if(listreserv.isEmpty()){
@@ -254,7 +253,7 @@ public class AubergeInn
                                 client.getAge()+ " ");
                     }
                     else {
-                        for(TupleReservation t : listreserv){
+                        for(Reservation t : listreserv){
                             System.out.println(client.getIdClient()+ "\t "+
                                     client.getPrenom()+ "\t "+
                                     client.getNom()+ " \t"+

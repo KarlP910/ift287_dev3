@@ -3,7 +3,7 @@ package AubergeInn.transactions;
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
 import AubergeInn.tables.Client;
-import AubergeInn.tables.Reservation;
+import AubergeInn.tables.Reservations;
 import AubergeInn.tuples.TupleClient;
 
 import java.sql.SQLException;
@@ -13,9 +13,9 @@ public class GestionClient {
 
     private Connexion cx;
     private Client client;
-    private Reservation reserv;
+    private Reservations reserv;
 
-    public GestionClient(Client client, Reservation reserv){
+    public GestionClient(Client client, Reservations reserv){
         this.client=client;
         this.reserv=reserv;
         this.cx=client.getConnexion();

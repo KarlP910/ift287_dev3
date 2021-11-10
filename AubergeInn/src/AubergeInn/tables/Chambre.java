@@ -2,28 +2,44 @@ package AubergeInn.tables;
 
 import AubergeInn.Connexion;
 import AubergeInn.tuples.TupleChambre;
-import AubergeInn.Connexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
+import javax.persistence.TypedQuery;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Chambre {
+
+    private Connexion cx;
+    /*
     private final PreparedStatement stmtExiste;
     private final PreparedStatement stmtInsert;
     private final PreparedStatement stmtUpdate;
     private final PreparedStatement stmtDelete;
     private final PreparedStatement stmtUpdateCommodite;
     private final PreparedStatement  stmtSelectAll;
+    */
+    private TypedQuery<TupleChambre> stmtExiste;
 
-    private final Connexion cx;
+    private TypedQuery<TupleChambre> stmtUpdateCommodite;
+    private TypedQuery<TupleChambre> stmtSelectAll;
+
+
 
 
 
     public Chambre(Connexion cx) throws SQLException {
         this.cx=cx;
+
+        stmtExiste = cx.getConnection().createQuery("select l from TupleChambre l where l.c_idChambre = :idChambre", TupleChambre.class);
+
+        stmtUpdateCommodite = cx.getConnection().createQuery("select l from TupleChambre l where l.c_idCommodite = :Commodite", TupleChambre.class);
+
+        stmtSelectAll = cx.getConnection().createQuery("select l from TupleChambre l", TupleChambre.class);
+
+
+        /*
         stmtExiste =cx.getConnection().prepareStatement(
                 "select idChambre, nom_chambre, type_lit,prix_base,idCommodite from chambre where idChambre = ?");
         stmtInsert =cx.getConnection().prepareStatement(
@@ -36,43 +52,73 @@ public class Chambre {
                 "update chambre set idcommodite=null where idchambre=? AND idcommodite=?"); //delete une chambre
         stmtSelectAll = cx.getConnection()
                 .prepareStatement("select * from Chambre");
+
+         */
     }
-    //Vérifie si une chambre existe
+
+    /**
+     * Retourner la connexion associé
+     */
+    public Connexion getConnexion()
+    {
+        return cx;
+    }
+
+
+
+    /**
+    Vérifie si une chambre existe
+     */
+
     public boolean existe(int idChambre) throws SQLException
     {
+        /*
         stmtExiste.setInt(1, idChambre);
         ResultSet rset = stmtExiste.executeQuery();
         boolean reservationExiste = rset.next();
         rset.close();
         return reservationExiste;
+
+         */
+        stmtExiste.setParameter("idChambre", idChambre);
+        return !stmtExiste.getResultList().isEmpty();
+
     }
 
-    public Connexion getConnexion(){
-        return cx;
-    }
 
     /**
      * Ajoute une chambre au système
      */
-    public void ajouterChambre(int idChambre,String nom_chambre,String type_lit,float prix_base)
+    public TupleChambre ajouterChambre(TupleChambre chambre)
     throws SQLException{
 
+        // Ajout d'une chambre.
+        cx.getConnection().persist(chambre);
+
+        return chambre;
+        /*
         stmtInsert.setInt(1,idChambre);
         stmtInsert.setString(2,nom_chambre);
         stmtInsert.setString(3,type_lit);
         stmtInsert.setFloat(4,prix_base);
         stmtInsert.executeUpdate();
 
+
+         */
     }
 
     /**
      * Supprime une chambre au système
      */
-    public int supprimerChambre(int idChambre)
+    public boolean supprimerChambre(TupleChambre chambre)
             throws SQLException{
 
-        stmtDelete.setInt(1,idChambre);
-        return stmtDelete.executeUpdate();
+        if(chambre != null)
+        {
+            cx.getConnection().remove(chambre);
+            return true;
+        }
+        return false;
 
     }
     /**
@@ -102,6 +148,18 @@ public class Chambre {
      * Lecture d'une chambre
      */
     public TupleChambre getChambre(int idChambre) throws SQLException {
+
+        stmtExiste.setParameter("idChambre", idChambre);
+        List<TupleChambre> chambres = stmtExiste.getResultList();
+        if(!chambres.isEmpty())
+        {
+            return chambres.get(0);
+        }
+        else
+        {
+            return null;
+        }
+        /*
         stmtExiste.setInt(1, idChambre);
         ResultSet rset = stmtExiste.executeQuery();
         if (rset.next())
@@ -117,6 +175,8 @@ public class Chambre {
         }
         else
             return null;
+
+         */
     }
     public List<TupleChambre> getAll() throws SQLException
     {

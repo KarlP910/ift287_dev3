@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="objectdb">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AubergeInn/objectdb.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

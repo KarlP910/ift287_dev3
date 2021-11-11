@@ -2,11 +2,10 @@ package AubergeInn.tables;
 
 import AubergeInn.Connexion;
 import AubergeInn.tuples.Chambre;
+import AubergeInn.tuples.Commodite;
 
 import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Chambres {
@@ -24,6 +23,8 @@ public class Chambres {
 
     private TypedQuery<Chambre> stmtUpdateCommodite;
     private TypedQuery<Chambre> stmtSelectAll;
+    private TypedQuery<Chambre> stmtAfficherChambre;
+    private TypedQuery<Chambre> stmtAfficherChambreLibre;
 
 
 
@@ -34,9 +35,14 @@ public class Chambres {
         
         stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
 
-        stmtUpdateCommodite = cx.getConnection().createQuery("select l from Chambre l where l.c_idCommodite = :Commodite", Chambre.class);
+       // stmtUpdateCommodite = cx.getConnection().createQuery("select l from Chambre l where l.c_idCommodite = :Commodite", Chambre.class);
 
         stmtSelectAll = cx.getConnection().createQuery("select l from Chambre l", Chambre.class);
+
+        stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
+
+        //TODO
+        stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.c_idChambre = :idChambre", Chambre.class);
      
 
 
@@ -127,10 +133,14 @@ public class Chambres {
     /** A faire
      * Affiche une chambre
      */
-    public Chambre afficherChambre(int idChambre)
+    public List<Chambre> afficherChambre(int idChambre)
     throws SQLException{
 
         stmtExiste.setParameter("idChambre", idChambre);
+        //stmtAfficherChambre.setParameter("idChambre", idChambre);
+        List<Chambre> chambres = stmtAfficherChambre.getResultList();
+        return chambres;
+
 
         /*
         stmtExiste.setInt(1,idChambre);
@@ -154,6 +164,13 @@ public class Chambres {
          */
 
     }
+    public List<Chambre> afficherChambreLibre()
+            throws SQLException {
+        //stmtAfficherChambre.setParameter("idChambre", idChambre);
+        List<Chambre> chambres = stmtAfficherChambreLibre.getResultList();
+        return chambres;
+    }
+
     /**  A faire
      * Lecture d'une chambre
      */
@@ -189,9 +206,13 @@ public class Chambres {
          */
     }
 
+
+
     /**
      * A faire
      */
+
+    /*
     public List<Chambre> getAll() throws SQLException
     {
 
@@ -212,4 +233,20 @@ public class Chambres {
         rset.close();
         return listeChambre;
     }
+
+     */
+
+  // Vu qu'on est dans le modèle object une chambre a un attribut de commdité, alors c'est tout a fait normal d'avoir commodité pour un object chambre
+
+    public void inclureCommodite(Chambre chambre, Commodite commodite) throws SQLException {
+        chambre.inclureCommodite(commodite);
+    }
+
+    // A faire
+    public void enleverCommodite(Chambre chambre, Commodite commodite) throws SQLException {
+        chambre.enleverCommodite(commodite);
+    }
+
+
+
 }

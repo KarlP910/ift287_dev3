@@ -222,7 +222,14 @@ public class AubergeInn
                 // *********************
                 else if (command.equals("afficherChambresLibres")) {
                     //TODO
+
+                    Date dateCourante = readDate(tokenizer);
+                    gestionSystem.getGestionChambre().afficherChambresLibres(dateCourante);
+
                 //    gestionSystem.getGestionReservation().afficherChambreVide();
+
+                    /*
+
                     List<Chambre> listChambreLibres= gestionSystem.getGestionChambre().afficherChambresLibres();
 
                     System.out.println("\nidChambre\tnom\ttype de lit\tprix total");
@@ -233,6 +240,8 @@ public class AubergeInn
 
                         System.out.println(chambre.getIdChambre() + "\t" + chambre.getNom_chambre() + "\t" + chambre.getType_lit() + "\t" + total);
                     }
+
+                     */
 
 
                 }
@@ -271,6 +280,12 @@ public class AubergeInn
                 // *********************
                 else if (command.equals("afficherChambre")) {
                     //TODO
+
+                    int idChambre = readInt(tokenizer);
+                    gestionSystem.getGestionChambre().afficherChambre(idChambre);
+
+                    /*
+
                     int idChambre=readInt(tokenizer);
                     Chambre tchambre= gestionSystem.getGestionChambre().afficherChambre(idChambre);
                     System.out.println("\nidChambre\tnom\ttype de lit\tprix");
@@ -284,6 +299,8 @@ public class AubergeInn
                         }
                     }
 
+
+                     */
                 }
                 // *********************
                 // RÉSERVE UNE CHAMBRE PAR UN CLIENT

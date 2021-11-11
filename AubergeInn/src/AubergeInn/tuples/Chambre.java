@@ -1,6 +1,8 @@
 package AubergeInn.tuples;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.ArrayList;
 
 
 @Entity
@@ -14,25 +16,30 @@ public class Chambre {
     private String c_type_lit;
     private String c_nom_chambre;
     private float c_prix_base;
-    private int c_idCommodite;
+    private ArrayList<Commodite> listeCommodites;
+
 
     // PAS SUR DU TOUT
     @ManyToOne(fetch = FetchType.LAZY)
     private Reservation idReservation;
     private boolean idChambreNull;
+    private Date c_datePret;
 
-    public Chambre(){
+    public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base) {
 
     }
-    public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base, int idCommodite){
+
+    public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base, ArrayList<Commodite> listeCommodites){
 
         c_idChambre = idChambre;
         c_type_lit = type_lit;
         c_nom_chambre = nom_chambre;
         c_prix_base = prix_base;
-        c_idCommodite = idCommodite;
+        listeCommodites= new ArrayList<Commodite>();
 
     }
+
+
 
 
     /***
@@ -58,11 +65,26 @@ public class Chambre {
 
     public void setPrix_base(Float prix_base){ this.c_prix_base=prix_base;}
 
-    public int getIdCommodite(){ return c_idCommodite;}
 
-    public void setIdCommodite(int idCommodite){ this.c_idCommodite=idCommodite;}
 
     public boolean isIdChambreNull() {
         return idChambreNull;
     }
+
+    public Reservation getLouer() {
+
+        return idReservation;
+    }
+
+    public Date getDateLouer() {
+        return c_datePret;
+    }
+
+    public void inclureCommodite(Commodite commodite) {
+        listeCommodites.add(commodite);
+    }
+    public void enleverCommodite(Commodite commodite) {
+        listeCommodites.remove(commodite);
+    }
+
 }

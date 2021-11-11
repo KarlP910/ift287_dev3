@@ -2,6 +2,7 @@ package AubergeInn.transactions;
 
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
+import AubergeInn.tables.Commodites;
 import AubergeInn.tables.Reservations;
 import AubergeInn.tuples.Commodite;
 
@@ -10,13 +11,13 @@ import java.sql.SQLException;
 public class GestionCommodite {
 
     private Connexion cx;
-    private AubergeInn.tables.Commodite commodite;
+    private Commodites commodites;
     private Reservations reserv;
 
-    public GestionCommodite(AubergeInn.tables.Commodite commodite, Reservations reserv){
-        this.commodite=commodite;
+    public GestionCommodite(Commodites commodites, Reservations reserv){
+        this.commodites = commodites;
         this.reserv=reserv;
-        this.cx=commodite.getConnexion();
+        this.cx= commodites.getConnexion();
     }
     /**
      * Ajoute une commodité au système
@@ -25,13 +26,15 @@ public class GestionCommodite {
             throws SQLException, IFT287Exception,Exception
     {
         try{
+            cx.demarreTransaction();
+            Commodite c=new Commodite(idCommodite,description,surplus_prix);
             //Vérifie si la commodite est déjà dans la base de données
-            if(commodite.existe(idCommodite))
+            if(commodites.existe(idCommodite))
                 throw new IFT287Exception("La commodite: "+idCommodite +" est deja inclus");
 
 
             //Ajoute le client dans la base de données
-            commodite.ajouterCommodite(idCommodite,description,surplus_prix);
+            commodites.ajouterCommodite(c);
 
             //Commit
             cx.commit();
@@ -46,11 +49,11 @@ public class GestionCommodite {
     {
         try
         {
-            Commodite tupleCommodite = this.commodite.getCommodite(id);
+            Commodite tupleCommodite = this.commodites.getCommodite(id);
             if (tupleCommodite == null)
                 throw new IFT287Exception("La commodite n'existe deja.");
 
-            Commodite commodite = this.commodite.getCommodite(id);
+            Commodite commodite = this.commodites.getCommodite(id);
             cx.commit();
             return commodite.getSurplus_prix();
         }

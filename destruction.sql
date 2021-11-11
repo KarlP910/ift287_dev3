@@ -1,1 +1,1 @@
-DROP TABLE reservation,clients,chambres,commodite,service;
+DROP TABLE reservation,clients,chambres,commodites,service;

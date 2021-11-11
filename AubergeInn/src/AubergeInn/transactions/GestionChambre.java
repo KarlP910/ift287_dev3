@@ -10,7 +10,6 @@ import AubergeInn.tuples.TupleService;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -19,14 +18,12 @@ public class GestionChambre {
     private Connexion cx;
     private Chambres chambres;
     private Reservations reserv;
-    private Commodite commodite;
     private Service service;
 
-    public GestionChambre(Chambres chambres, Reservations reserv, Commodite commodite, Service service) {
+    public GestionChambre(Chambres chambres, Reservations reserv, Service service) {
         this.chambres = chambres;
         this.reserv = reserv;
         this.cx = chambres.getConnexion();
-        this.commodite = commodite;
         this.service = service;
     }
 
@@ -148,7 +145,7 @@ public class GestionChambre {
 
      */
 
-    public void inclureCommodite(int idChambre, int idCommodite, AubergeInn.tables.Commodite commodites) throws SQLException, IFT287Exception, Exception {
+    public void inclureCommodite(int idChambre, int idCommodite, Commodites commodites) throws SQLException, IFT287Exception, Exception {
         try {
             Chambre chambre = chambres.getChambre(idChambre);
             Commodite comm = commodites.getCommodite(idCommodite);
@@ -183,17 +180,6 @@ public class GestionChambre {
         }
     }
 
-    public List<Commodite> getListeCommodite(int idChambre, AubergeInn.tables.Commodite tableCommodite) throws SQLException, IFT287Exception, Exception {
-        try {
-            ArrayList<Integer> listeCommoditeId = service.getService(idChambre);
-            List<Commodite> listeCommodite = tableCommodite.getAll(listeCommoditeId);
-            cx.commit();
-            return listeCommodite;
-        } catch (Exception e) {
-            cx.rollback();
-            throw e;
-        }
-    }
 
     public double prixServices(int idChambre, GestionCommodite gestionCommodite) throws SQLException, IFT287Exception, Exception {
         try {

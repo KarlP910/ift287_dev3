@@ -8,8 +8,8 @@ PRIMARY KEY (idClient)
 );
 
 
-DROP TABLE IF EXISTS commodite CASCADE;
-CREATE TABLE commodite(
+DROP TABLE IF EXISTS commodites CASCADE;
+CREATE TABLE commodites(
 idCommodite	numeric(10) NOT NULL,
 description	varchar(20) NOT NULL,
 surplus_prix	varchar(20) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE chambres(
     prix_base 	float(2) NOT NULL,
     idCommodite numeric(10) NULL,
     PRIMARY KEY (idChambre),
-    FOREIGN KEY (idCommodite) REFERENCES commodite
+    FOREIGN KEY (idCommodite) REFERENCES commodites
 );
 DROP TABLE IF EXISTS reservation CASCADE;
 CREATE TABLE reservation(

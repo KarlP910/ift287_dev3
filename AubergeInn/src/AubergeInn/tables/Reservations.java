@@ -2,10 +2,12 @@ package AubergeInn.tables;
 
 import AubergeInn.Connexion;
 import AubergeInn.tuples.Chambre;
+import AubergeInn.tuples.Client;
 import AubergeInn.tuples.Reservation;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class Reservations {
@@ -20,10 +22,10 @@ public class Reservations {
         {
             //pt verif sur reserv
             this.cx=cx;
-            stmtExiste = cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre and r.m_client = : client", Reservation.class);
-            stmtExisteChambre = cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre", Reservation.class);
-            stmtExisteClient = cx.getConnection().createQuery("select r from Reservation r where r.m_client = :client", Reservation.class);
-            stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambre = :chambre and r.m_date_debut <= :date and r.m_date_fin >:date", Reservation.class);
+            stmtExiste = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_clients = : client", Reservation.class);
+            stmtExisteChambre = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre", Reservation.class);
+            stmtExisteClient = cx.getConnection().createQuery("select r from Reservation r where r.m_clients = :client", Reservation.class);
+            stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_date_debut <= :date and r.m_date_fin >:date", Reservation.class);
 
 
         }
@@ -45,24 +47,20 @@ public class Reservations {
         /* Ajout de la reservation. */
       cx.getConnection().persist(r);
     }
-    /**
+
     public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
     {
 
-        stmtExisteReservation.setInt(1, idChambre);
-        stmtExisteReservation.setDate(2, debut);
-        stmtExisteReservation.setDate(3, fin);
-        ResultSet rset = stmtExisteReservation.executeQuery();
-        if (rset.next())
+        stmtExisteReservation.setParameter(1, idChambre);
+        stmtExisteReservation.setParameter(2, debut);
+        stmtExisteReservation.setParameter(3, fin);
+        List<Reservation> reservations = stmtExisteReservation.getResultList();
+        if(!reservations.isEmpty())
         {
-            Reservation reservation = new Reservation(rset.getInt(1), idChambre, debut, fin);
-            rset.close();
-            return reservation;
+            return reservations.get(0);
         }
-        else
-        {
-            return null;
-        }
+        return null;
+
     }
     /**
      * Lecture de la réservation d'une chambre
@@ -80,7 +78,7 @@ public class Reservations {
     /**
      * Lecture de la réservation d'un client
      */
-    public List<Reservation> getReservationClient(Clients clients) throws SQLException
+    public List<Reservation> getReservationClient(Client clients) throws SQLException
     {
         stmtExisteClient.setParameter(1, clients);
         List<Reservation> reservations = stmtExisteClient.getResultList();

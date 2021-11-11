@@ -15,13 +15,13 @@ public class Reservation {
     private Date m_date_debut;
     private Date m_date_fin;
 
-    private Chambres m_chambres;
-    private Clients m_clients;
+    private Chambre m_chambres;
+    private Client m_clients;
 
     public Reservation(){
 
     }
-    public Reservation(Clients clients, Chambres chambres, Date date_debut, Date date_fin){
+    public Reservation(Client clients, Chambre chambres, Date date_debut, Date date_fin){
 
 
         m_clients = clients;
@@ -33,11 +33,11 @@ public class Reservation {
     //Chaque fonction est un get et un set de nos attributs de la classe
 
 
-    public Chambres getChambre(){ return m_chambres;}
+    public Chambre getChambre(){ return m_chambres;}
 
     public Date getDate_debut(){ return m_date_debut;}
 
     public Date getDate_fin(){ return m_date_fin;}
 
-    public Clients getClient(){ return m_clients;}
+    public Client getClient(){ return m_clients;}
 }

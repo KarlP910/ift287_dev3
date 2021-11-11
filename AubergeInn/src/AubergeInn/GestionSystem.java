@@ -14,7 +14,7 @@ public class GestionSystem {
     private Connexion cx;
     private Chambres chambres;
     private Clients clients;
-    private Commodite commodite;
+    private Commodites commodites;
     private Reservations reservations;
     private Service service;
     private GestionChambre gestionChambre;
@@ -30,7 +30,7 @@ public class GestionSystem {
         cx = new Connexion(serveur,bd,user,password);
         chambres = new Chambres(cx);
         clients = new Clients(cx);
-        commodite = new Commodite(cx);
+        commodites = new Commodites(cx);
         reservations = new Reservations(cx);
         service=new Service(cx);
 
@@ -39,9 +39,9 @@ public class GestionSystem {
         //**************************************************************************
         //TODO
         //TODO
-        setGestionChambre(new GestionChambre(chambres, reservations,commodite,service));
+        setGestionChambre(new GestionChambre(chambres, reservations,service));
         setGestionClient(new GestionClient(clients, reservations));
-        setGestionCommodite(new GestionCommodite(commodite, reservations));
+        setGestionCommodite(new GestionCommodite(commodites, reservations));
         setGestionReservation(new GestionReservation(reservations, chambres, clients));
 
     }
@@ -84,5 +84,5 @@ public class GestionSystem {
 
         this.gestionCommodite = gestionCommodite;
     }
-    public Commodite getTableCommodite() { return commodite; }
+    public Commodites getTableCommodite() { return commodites; }
 }

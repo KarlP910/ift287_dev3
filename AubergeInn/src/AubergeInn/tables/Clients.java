@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Clients {
 
@@ -85,10 +86,10 @@ public class Clients {
 
     }
 
-
+//Peut-etre pas a faire car on va afficher le clients correspondant dans le main
     /**  A faire
      * Afficher les clients
-     */
+
     public Client afficherClient(int idClient) throws SQLException{
         stmtExiste.setInt(1,idClient);
        ResultSet rset= stmtExiste.executeQuery();
@@ -106,23 +107,17 @@ public class Clients {
             return null;
         }
     }
-
+*/
     /** A faire
      * Lecture d'un client
      */
     public Client getClient(int idClient) throws SQLException
     {
-        stmtExiste.setInt(1, idClient);
-        ResultSet rset = stmtExiste.executeQuery();
-        if (rset.next())
+        stmtExiste.setParameter(1, idClient);
+        List<Client> clients = stmtExiste.getResultList();
+        if(!clients.isEmpty())
         {
-            Client tupleClient = new Client();
-            tupleClient.setIdClient(idClient);
-            tupleClient.setPrenom(rset.getString(2));
-            tupleClient.setNom(rset.getString(3));
-            tupleClient.setAge(rset.getInt(4));
-            rset.close();
-            return tupleClient;
+            return clients.get(0);
         }
         else
         {

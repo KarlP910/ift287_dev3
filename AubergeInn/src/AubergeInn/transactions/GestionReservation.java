@@ -52,7 +52,7 @@ public class GestionReservation {
     }
 
     /**
-     * Réserve une chambre à un client avec une date de debut et une date de fin
+     * Réserve une chambre à un client avec une date de debut et une date de fin (pt a mettre dans chambre)
      */
     public void reserver(int idClient, int idChambre, Date dateDebut, Date dateFin)
             throws SQLException, IFT287Exception,Exception

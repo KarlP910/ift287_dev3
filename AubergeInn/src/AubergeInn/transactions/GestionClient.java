@@ -28,12 +28,14 @@ public class GestionClient {
     throws SQLException,IFT287Exception,Exception
     {
         try{
+            cx.demarreTransaction();
+            Client c=new Client(idClient,prenom,nom,age);
             //Vérifie si le client est déjà dans la base de données
             if(clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" existe déjà.");
 
             //Ajoute le client dans la base de données
-            clients.ajoutClient(idClient,prenom,nom,age);
+            clients.ajoutClient(c);
 
             //Commit
             cx.commit();
@@ -52,7 +54,8 @@ public class GestionClient {
             throws SQLException,IFT287Exception,Exception
     {
         try{
-            Clients clients= this.clients.getClient(idClient);
+            cx.demarreTransaction();
+            Client clients= this.clients.getClient(idClient);
             //Vérifie si le client est déjà dans la base de données
             if(!this.clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" n'existe pas.");
@@ -60,7 +63,7 @@ public class GestionClient {
             if(reserv.getReservationClient(clients) != null){
                 throw new IFT287Exception("Le client "+idClient+" a encore des réservations.");
             }
-            this.clients.supprimerClient(idClient);
+            this.clients.supprimerClient(clients);
             //Commit
             cx.commit();
         }

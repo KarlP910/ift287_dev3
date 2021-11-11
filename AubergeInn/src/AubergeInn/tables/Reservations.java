@@ -1,15 +1,11 @@
 package AubergeInn.tables;
 
 import AubergeInn.Connexion;
+import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Reservation;
 
 import javax.persistence.TypedQuery;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Reservations {
@@ -36,11 +32,11 @@ public class Reservations {
     }
 
 
-    public boolean existe(Client client,Chambre chambre) throws SQLException
+    public boolean existe(Clients clients, Chambres chambres) throws SQLException
     {
 
-        stmtExiste.setParameter("1", chambre);
-        stmtExiste.setParameter("2", client);
+        stmtExiste.setParameter("1", chambres);
+        stmtExiste.setParameter("2", clients);
         return !stmtExiste.getResultList().isEmpty();
     }
 
@@ -84,9 +80,9 @@ public class Reservations {
     /**
      * Lecture de la réservation d'un client
      */
-    public List<Reservation> getReservationClient(Client client) throws SQLException
+    public List<Reservation> getReservationClient(Clients clients) throws SQLException
     {
-        stmtExisteClient.setParameter(1, client);
+        stmtExisteClient.setParameter(1, clients);
         List<Reservation> reservations = stmtExisteClient.getResultList();
         if(!reservations.isEmpty())
         {

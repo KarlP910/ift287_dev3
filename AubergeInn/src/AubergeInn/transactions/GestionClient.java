@@ -2,9 +2,9 @@ package AubergeInn.transactions;
 
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
-import AubergeInn.tables.Client;
+import AubergeInn.tables.Clients;
 import AubergeInn.tables.Reservations;
-import AubergeInn.tuples.TupleClient;
+import AubergeInn.tuples.Client;
 
 import java.sql.SQLException;
 
@@ -12,13 +12,13 @@ import java.sql.SQLException;
 public class GestionClient {
 
     private Connexion cx;
-    private Client client;
+    private Clients clients;
     private Reservations reserv;
 
-    public GestionClient(Client client, Reservations reserv){
-        this.client=client;
+    public GestionClient(Clients clients, Reservations reserv){
+        this.clients = clients;
         this.reserv=reserv;
-        this.cx=client.getConnexion();
+        this.cx= clients.getConnexion();
     }
     /**
      * Ajout d'un nouveau membre dans la base de données. S'il existe déjà, une
@@ -29,11 +29,11 @@ public class GestionClient {
     {
         try{
             //Vérifie si le client est déjà dans la base de données
-            if(client.existe(idClient))
+            if(clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" existe déjà.");
 
             //Ajoute le client dans la base de données
-            client.ajoutClient(idClient,prenom,nom,age);
+            clients.ajoutClient(idClient,prenom,nom,age);
 
             //Commit
             cx.commit();
@@ -52,15 +52,15 @@ public class GestionClient {
             throws SQLException,IFT287Exception,Exception
     {
         try{
-            Client clients=client.getClient(idClient);
+            Clients clients= this.clients.getClient(idClient);
             //Vérifie si le client est déjà dans la base de données
-            if(!client.existe(idClient))
+            if(!this.clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" n'existe pas.");
             //if(client.get PROBLEME POTENTIEL DE BD
             if(reserv.getReservationClient(clients) != null){
                 throw new IFT287Exception("Le client "+idClient+" a encore des réservations.");
             }
-            client.supprimerClient(idClient);
+            this.clients.supprimerClient(idClient);
             //Commit
             cx.commit();
         }
@@ -74,15 +74,15 @@ public class GestionClient {
     /**
      * Affiche toutes les informations du client qui ont des réservations en cours et antérieure
      */
-    public TupleClient afficherClient(int idClient)
+    public Client afficherClient(int idClient)
             throws SQLException,IFT287Exception,Exception{
         try {
-            if (!client.existe(idClient))
+            if (!clients.existe(idClient))
                 throw new IFT287Exception("Le client " + idClient + " n'existe pas");
 
 
             cx.commit();
-            return client.afficherClient(idClient);
+            return clients.afficherClient(idClient);
 
         }
         catch(Exception e){

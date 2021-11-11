@@ -1,10 +1,9 @@
 package AubergeInn.transactions;
 
-import AubergeInn.AubergeInn;
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
-import AubergeInn.tables.Chambre;
-import AubergeInn.tables.Client;
+import AubergeInn.tables.Chambres;
+import AubergeInn.tables.Clients;
 import AubergeInn.tables.Reservations;
 import AubergeInn.tuples.Reservation;
 
@@ -16,17 +15,17 @@ public class GestionReservation {
 
     private Connexion cx;
     private Reservations reservation;
-    private Client client;
-    private Chambre chambre;
+    private Clients clients;
+    private Chambres chambres;
 
-    public GestionReservation(Reservations reservation,Chambre chambre,Client client) throws IFT287Exception{
+    public GestionReservation(Reservations reservation, Chambres chambres, Clients clients) throws IFT287Exception{
 
-        if (chambre.getConnexion() != client.getConnexion() || reservation.getConnexion() != client.getConnexion())
+        if (chambres.getConnexion() != clients.getConnexion() || reservation.getConnexion() != clients.getConnexion())
             throw new IFT287Exception (
                     "Les collections d'objets n'utilisent pas la même connexion au serveur");
         this.reservation=reservation;
-        this.chambre=chambre;
-        this.client=client;
+        this.chambres = chambres;
+        this.clients = clients;
         this.cx=reservation.getConnexion();
     }
 
@@ -38,7 +37,7 @@ public class GestionReservation {
     public List<Reservation> listReservationClient(int idClient)
             throws SQLException, IFT287Exception,Exception{
         try {
-            if (!client.existe(idClient))
+            if (!clients.existe(idClient))
                 throw new IFT287Exception("Le client" + idClient + " n'existe pas");
 
                 List<Reservation> reserv=reservation.listeReservationClient(idClient);

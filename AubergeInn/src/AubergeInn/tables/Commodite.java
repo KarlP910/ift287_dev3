@@ -1,8 +1,6 @@
 package AubergeInn.tables;
 
 import AubergeInn.Connexion;
-import AubergeInn.tuples.TupleChambre;
-import AubergeInn.tuples.TupleCommodite;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +50,7 @@ public class Commodite {
     /**
      * Lecture d'une commodite
      */
-    public TupleCommodite getCommodite(int idCommodite)
+    public AubergeInn.tuples.Commodite getCommodite(int idCommodite)
             throws SQLException{
         stmtExiste.setInt(1,idCommodite);
         ResultSet rset=stmtExiste.executeQuery();
@@ -60,7 +58,7 @@ public class Commodite {
         if (rset.next())
         {
             // idChambre, nom_chambre, type_lit,prix_base,idCommodite
-            TupleCommodite commodite= new TupleCommodite(rset.getInt("idCommodite"),
+            AubergeInn.tuples.Commodite commodite= new AubergeInn.tuples.Commodite(rset.getInt("idCommodite"),
                     rset.getString("description"),
                     rset.getFloat("surplus_prix"));
 
@@ -83,9 +81,9 @@ public class Commodite {
         stmtInsert.setFloat(3, surplus_prix);
         stmtInsert.executeUpdate();
     }
-    public List<TupleCommodite> getAll(ArrayList<Integer> listeId) throws SQLException
+    public List<AubergeInn.tuples.Commodite> getAll(ArrayList<Integer> listeId) throws SQLException
     {
-        List<TupleCommodite> listeCommodite = new LinkedList<TupleCommodite>();
+        List<AubergeInn.tuples.Commodite> listeCommodite = new LinkedList<AubergeInn.tuples.Commodite>();
         for (int id : listeId)
         {
             listeCommodite.add(getCommodite(id));

@@ -1,6 +1,6 @@
-select * from client order by idclient;
+select * from clients order by idclient;
 select * from commodite order by idcommodite;
-select * from chambre order by idchambre;
+select * from chambres order by idchambre;
 select * from reservation;
 select * from service;
 

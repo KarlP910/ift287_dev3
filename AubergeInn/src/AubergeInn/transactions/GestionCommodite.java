@@ -2,19 +2,18 @@ package AubergeInn.transactions;
 
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
-import AubergeInn.tables.Commodite;
 import AubergeInn.tables.Reservations;
-import AubergeInn.tuples.TupleCommodite;
+import AubergeInn.tuples.Commodite;
 
 import java.sql.SQLException;
 
 public class GestionCommodite {
 
     private Connexion cx;
-    private Commodite commodite;
+    private AubergeInn.tables.Commodite commodite;
     private Reservations reserv;
 
-    public GestionCommodite(Commodite commodite, Reservations reserv){
+    public GestionCommodite(AubergeInn.tables.Commodite commodite, Reservations reserv){
         this.commodite=commodite;
         this.reserv=reserv;
         this.cx=commodite.getConnexion();
@@ -47,13 +46,13 @@ public class GestionCommodite {
     {
         try
         {
-            TupleCommodite tupleCommodite = commodite.getCommodite(id);
+            Commodite tupleCommodite = this.commodite.getCommodite(id);
             if (tupleCommodite == null)
                 throw new IFT287Exception("La commodite n'existe deja.");
 
-            TupleCommodite commodites= commodite.getCommodite(id);
+            Commodite commodite = this.commodite.getCommodite(id);
             cx.commit();
-            return commodites.getSurplus_prix();
+            return commodite.getSurplus_prix();
         }
         catch(Exception e)
         {

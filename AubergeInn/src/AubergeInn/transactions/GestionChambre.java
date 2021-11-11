@@ -3,8 +3,8 @@ package AubergeInn.transactions;
 import AubergeInn.Connexion;
 import AubergeInn.IFT287Exception;
 import AubergeInn.tables.*;
-import AubergeInn.tuples.TupleChambre;
-import AubergeInn.tuples.TupleCommodite;
+import AubergeInn.tuples.Chambre;
+import AubergeInn.tuples.Commodite;
 import AubergeInn.tuples.TupleService;
 
 import java.sql.SQLException;
@@ -15,15 +15,15 @@ import java.util.List;
 public class GestionChambre {
 
     private Connexion cx;
-    private Chambre chambre;
+    private Chambres chambres;
     private Reservations reserv;
-    private Commodite commodite;
+    private AubergeInn.tables.Commodite commodite;
     private Service service;
 
-    public GestionChambre(Chambre chambre, Reservations reserv, Commodite commodite, Service service){
-        this.chambre=chambre;
+    public GestionChambre(Chambres chambres, Reservations reserv, AubergeInn.tables.Commodite commodite, Service service){
+        this.chambres = chambres;
         this.reserv=reserv;
-        this.cx=chambre.getConnexion();
+        this.cx= chambres.getConnexion();
         this.commodite = commodite;
         this.service=service;
     }
@@ -32,10 +32,17 @@ public class GestionChambre {
      */
     public void ajouterChambre(int idChambre,String nom_chambre,String type_lit,float prix_base) //a revoir pour commodite et reserv
             throws SQLException, IFT287Exception, Exception{
+
         try{
-            if(chambre.existe(idChambre))
+
+            cx.demarreTransaction();
+
+            Chambres c = new Chambres(idChambre,nom_chambre,type_lit,prix_base);
+
+            if(chambres.existe(idChambre))
                 throw new IFT287Exception("La chambre existe déjà: "+idChambre);
-            chambre.ajouterChambre(idChambre,nom_chambre,type_lit,prix_base);
+            //chambre.ajouterChambre(idChambre,nom_chambre,type_lit,prix_base);
+            chambres.ajouterChambre(c);
 
             cx.commit();
         }
@@ -50,14 +57,14 @@ public class GestionChambre {
     public void supprimerChambre(int idChambre) //a revoir pour commodite et reserv
             throws SQLException, IFT287Exception, Exception{
         try{
-            Chambre chambres=chambre.getChambre(idChambre);
-            if(!chambre.existe(idChambre))
+            Chambre chambre = chambres.getChambre(idChambre);
+            if(!chambres.existe(idChambre))
                 throw new IFT287Exception("La chambre n'existe pas: "+idChambre);
-            if(reserv.getReservationChambre(chambres) != null){
+            if(reserv.getReservationChambre(chambre) != null){
                 throw new IFT287Exception("La chambre "+idChambre+" a encore des réservations.");
             }
 
-           int nb= chambre.supprimerChambre(idChambre);
+           int nb= chambres.supprimerChambre(idChambre);
             if (nb==0){
                 throw new IFT287Exception("Chambre " + idChambre + " inexistante");
             }
@@ -68,7 +75,7 @@ public class GestionChambre {
             throw e;
         }
     }
-    public TupleCommodite afficherChambreCommodite(int idChambre)
+    public Commodite afficherChambreCommodite(int idChambre)
             throws SQLException, IFT287Exception, Exception {
         try {
 
@@ -86,13 +93,13 @@ public class GestionChambre {
     /**
      * Affiche les chambres avec leurs informations et avec les commodités offertes
      */
-    public TupleChambre afficherChambre(int idChambre)
+    public Chambre afficherChambre(int idChambre)
             throws SQLException, IFT287Exception, Exception{
         try{
-            if(chambre.existe(idChambre)){
+            if(chambres.existe(idChambre)){
 
                 cx.commit();
-                return chambre.afficherChambre(idChambre);
+                return chambres.afficherChambre(idChambre);
             }
             else{
                 throw new IFT287Exception("La chambre que vous voulez affichez n'existe pas "+ idChambre);
@@ -104,15 +111,15 @@ public class GestionChambre {
             throw e;
         }
     }
-    public void inclureCommodite(int idChambre, int idCommodite,Commodite commodites) throws SQLException, IFT287Exception, Exception
+    public void inclureCommodite(int idChambre, int idCommodite, AubergeInn.tables.Commodite commodites) throws SQLException, IFT287Exception, Exception
     {
         try
         {
-            TupleChambre chambres = chambre.getChambre(idChambre);
-            TupleCommodite comm = commodites.getCommodite(idCommodite);
-            if(chambres == null && comm == null)
+            Chambre chambre = chambres.getChambre(idChambre);
+            Commodite comm = commodites.getCommodite(idCommodite);
+            if(chambre == null && comm == null)
                 throw new IFT287Exception("La chambre et la commodite n'existent pas");
-            if(chambres == null)
+            if(chambre == null)
                 throw new IFT287Exception("La chambre n'existe pas");
             if(comm == null)
                 throw new IFT287Exception("La commodite n'existe pas");
@@ -146,12 +153,12 @@ public class GestionChambre {
             throw e;
         }
     }
-    public List<TupleCommodite> getListeCommodite(int idChambre, Commodite tableCommodite) throws SQLException, IFT287Exception, Exception
+    public List<Commodite> getListeCommodite(int idChambre, AubergeInn.tables.Commodite tableCommodite) throws SQLException, IFT287Exception, Exception
     {
         try
         {
             ArrayList<Integer> listeCommoditeId = service.getService(idChambre);
-            List<TupleCommodite> listeCommodite = tableCommodite.getAll(listeCommoditeId);
+            List<Commodite> listeCommodite = tableCommodite.getAll(listeCommoditeId);
             cx.commit();
             return listeCommodite;
         }
@@ -180,17 +187,17 @@ public class GestionChambre {
             throw e;
         }
     }
-    public List<TupleChambre> afficherChambresLibres() throws SQLException, IFT287Exception, Exception
+    public List<Chambre> afficherChambresLibres() throws SQLException, IFT287Exception, Exception
     {
         try
         {
-            List<TupleChambre> listeChambres = chambre.getAll();
+            List<Chambre> listeChambres = chambres.getAll();
             // code venant de stack overflow https://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
             ArrayList<Integer> listeChambreReserveId = reserv.getAllChambre(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
             for(Integer id : listeChambreReserveId)
             {
-                TupleChambre c = getTupleChambre(id);
+                Chambre c = getTupleChambre(id);
                 listeChambres.remove(c);
             }
 
@@ -203,16 +210,16 @@ public class GestionChambre {
             throw e;
         }
     }
-    public TupleChambre getTupleChambre(int idChambre) throws SQLException, IFT287Exception, Exception
+    public Chambre getTupleChambre(int idChambre) throws SQLException, IFT287Exception, Exception
     {
         try
         {
-            TupleChambre tupleChambre = chambre.getChambre(idChambre);
-            if(tupleChambre == null)
+            Chambre chambre = chambres.getChambre(idChambre);
+            if(chambre == null)
                 throw new IFT287Exception("La chambre n'existe pas.");
 
             cx.commit();
-            return tupleChambre;
+            return chambre;
         }
         catch(Exception e)
         {

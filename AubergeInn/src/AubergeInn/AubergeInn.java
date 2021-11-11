@@ -177,6 +177,7 @@ public class AubergeInn
                     String typeLit = readString(tokenizer);
                     float prix = readfloat(tokenizer);
                     gestionSystem.getGestionChambre().ajouterChambre(idChambre,nomChambre,typeLit,prix);
+                   // gestionSystem.getGestionChambre().ajouterChambre(idChambre);
 
                 }
                 // *********************
@@ -222,10 +223,10 @@ public class AubergeInn
                 else if (command.equals("afficherChambresLibres")) {
                     //TODO
                 //    gestionSystem.getGestionReservation().afficherChambreVide();
-                    List<TupleChambre> listChambreLibres= gestionSystem.getGestionChambre().afficherChambresLibres();
+                    List<Chambre> listChambreLibres= gestionSystem.getGestionChambre().afficherChambresLibres();
 
                     System.out.println("\nidChambre\tnom\ttype de lit\tprix total");
-                    for(TupleChambre chambre : listChambreLibres)
+                    for(Chambre chambre : listChambreLibres)
                     {
                         double prixSupplementaire = gestionSystem.getGestionChambre().prixServices(chambre.getIdChambre(), gestionSystem.getGestionCommodite());
                         double total =prixSupplementaire+chambre.getPrix_base();
@@ -241,7 +242,7 @@ public class AubergeInn
                 // *********************
                 else if (command.equals("afficherClient")) {
                     int idClient=readInt(tokenizer);
-                    TupleClient client= gestionSystem.getGestionClient().afficherClient(idClient);
+                    Client client= gestionSystem.getGestionClient().afficherClient(idClient);
                     List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(idClient);
 
                     System.out.println("\nidClient\tprenom\tnom\tage\tdate début\tdate départ");
@@ -271,14 +272,14 @@ public class AubergeInn
                 else if (command.equals("afficherChambre")) {
                     //TODO
                     int idChambre=readInt(tokenizer);
-                    TupleChambre tchambre= gestionSystem.getGestionChambre().afficherChambre(idChambre);
+                    Chambre tchambre= gestionSystem.getGestionChambre().afficherChambre(idChambre);
                     System.out.println("\nidChambre\tnom\ttype de lit\tprix");
                     System.out.println(tchambre.getIdChambre() + "\t" + tchambre.getNom_chambre()+ "\t" + tchambre.getType_lit()+ "\t" + tchambre.getPrix_base());
-                    List<TupleCommodite> listeCommodite = gestionSystem.getGestionChambre().getListeCommodite(idChambre, gestionSystem.getTableCommodite());
+                    List<Commodite> listeCommodite = gestionSystem.getGestionChambre().getListeCommodite(idChambre, gestionSystem.getTableCommodite());
 
                     if(!listeCommodite.isEmpty()) {
                         System.out.println("\nidCommodite\tdescription\tprix");
-                        for (TupleCommodite commo : listeCommodite) {
+                        for (Commodite commo : listeCommodite) {
                             System.out.println(commo.getIdCommodite() + "\t" + commo.getDescription() + "\t" + commo.getSurplus_prix() + "\t");
                         }
                     }

@@ -1,0 +1,66 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-11-11 14:46:55 #1 store] 
+Database 'C:\Users\Lennie\Documents\GitHub\ift287_dev3\AubergeInn.odb' is opened by 117764@DESKTOP-82SSSCN
+
+[2021-11-11 14:46:55 #2 store] 
+Configuration path: ?
+
+[2021-11-11 14:46:55 #3 type.registry] 
+New type AubergeInn.tuples.Chambre
+
+[2021-11-11 14:46:55 #4 type] 
+Type AubergeInn.tuples.Chambre is not enhanced.
+
+[2021-11-11 14:46:55 #5 type.registry] 
+New type AubergeInn.tuples.Commodite
+
+[2021-11-11 14:46:55 #6 type.registry] 
+New type java.util.ArrayList<AubergeInn.tuples.Commodite>
+
+[2021-11-11 14:46:55 #7 type] 
+Type AubergeInn.tuples.Commodite is not enhanced.
+
+[2021-11-11 14:46:55 #8 type.registry] 
+New type AubergeInn.tuples.Client
+
+[2021-11-11 14:46:55 #9 type] 
+Type AubergeInn.tuples.Client is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-11-11 14:48:21 #1 store] 
+Database 'C:\Users\Lennie\Documents\GitHub\ift287_dev3\AubergeInn.odb' has been recovered (tr. 1-4)
+
+[2021-11-11 14:48:21 #2 store] 
+Database 'C:\Users\Lennie\Documents\GitHub\ift287_dev3\AubergeInn.odb' is opened by 168664@DESKTOP-82SSSCN
+
+[2021-11-11 14:48:21 #3 store] 
+Configuration path: ?
+
+[2021-11-11 14:48:21 #4 type] 
+Type AubergeInn.tuples.Chambre is not enhanced.
+
+[2021-11-11 14:48:21 #5 type] 
+Type AubergeInn.tuples.Commodite is not enhanced.
+
+[2021-11-11 14:48:21 #6 type] 
+Type AubergeInn.tuples.Client is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-11-11 14:48:59 #1 store] 
+Database 'C:\Users\Lennie\Documents\GitHub\ift287_dev3\AubergeInn.odb' is opened by 177368@DESKTOP-82SSSCN
+
+[2021-11-11 14:48:59 #2 store] 
+Configuration path: ?
+
+[2021-11-11 14:48:59 #3 type] 
+Type AubergeInn.tuples.Chambre is not enhanced.
+
+[2021-11-11 14:49:00 #4 type] 
+Type AubergeInn.tuples.Commodite is not enhanced.
+
+[2021-11-11 14:49:00 #5 type] 
+Type AubergeInn.tuples.Client is not enhanced.
+

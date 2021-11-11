@@ -18,13 +18,14 @@ public class GestionChambre {
     private Connexion cx;
     private Chambres chambres;
     private Reservations reserv;
-    private Service service;
+    private Commodites commodites;
 
-    public GestionChambre(Chambres chambres, Reservations reserv, Service service) {
+
+    public GestionChambre(Chambres chambres, Reservations reserv,Commodites commodites) {
         this.chambres = chambres;
         this.reserv = reserv;
         this.cx = chambres.getConnexion();
-        this.service = service;
+        this.commodites=commodites;
     }
 
     /**
@@ -145,8 +146,10 @@ public class GestionChambre {
 
      */
 
-    public void inclureCommodite(int idChambre, int idCommodite, Commodites commodites) throws SQLException, IFT287Exception, Exception {
+    public void inclureCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
+
+            cx.demarreTransaction();
             Chambre chambre = chambres.getChambre(idChambre);
             Commodite comm = commodites.getCommodite(idCommodite);
             if (chambre == null && comm == null)
@@ -155,11 +158,11 @@ public class GestionChambre {
                 throw new IFT287Exception("La chambre n'existe pas");
             if (comm == null)
                 throw new IFT287Exception("La commodite n'existe pas");
-            TupleService tupleService = service.getService(idChambre, idCommodite);
-            if (tupleService != null)
-                throw new IFT287Exception("Ce service existe deja.");
+        //    TupleService tupleService = service.getService(idChambre, idCommodite);
+         //   if (tupleService != null)
+         //       throw new IFT287Exception("Ce service existe deja.");
 
-            service.inclureCommodite(idChambre, idCommodite);
+           chambres.inclureCommodite(chambre, comm);
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
@@ -169,10 +172,12 @@ public class GestionChambre {
 
     public void enleverCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
-            TupleService tupleService = service.getService(idChambre, idCommodite);
-            if (tupleService == null)
+            cx.demarreTransaction();
+            Chambre chambre = chambres.getChambre(idChambre);
+            Commodite comm = commodites.getCommodite(idCommodite);
+            if (comm == null)
                 throw new IFT287Exception("Ce service n'existe pas");
-            service.enleverCommodite(idChambre, idCommodite);
+            chambres.enleverCommodite(chambre, comm);
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
@@ -180,7 +185,7 @@ public class GestionChambre {
         }
     }
 
-
+/*
     public double prixServices(int idChambre, GestionCommodite gestionCommodite) throws SQLException, IFT287Exception, Exception {
         try {
             double total = 0;
@@ -196,6 +201,7 @@ public class GestionChambre {
         }
     }
 
+*/
     public void afficherChambresLibres(Date date) throws SQLException, IFT287Exception, Exception {
 
         cx.demarreTransaction();

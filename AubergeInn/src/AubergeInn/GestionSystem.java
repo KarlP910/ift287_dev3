@@ -16,7 +16,7 @@ public class GestionSystem {
     private Clients clients;
     private Commodites commodites;
     private Reservations reservations;
-    private Service service;
+
     private GestionChambre gestionChambre;
     private GestionClient gestionClient;
     private GestionCommodite gestionCommodite;
@@ -32,14 +32,13 @@ public class GestionSystem {
         clients = new Clients(cx);
         commodites = new Commodites(cx);
         reservations = new Reservations(cx);
-        service=new Service(cx);
 
         // Verifier les arguments passer dans les setter, argument bidon pour l'instant
         //**********************************************************************
         //**************************************************************************
         //TODO
         //TODO
-        setGestionChambre(new GestionChambre(chambres, reservations,service));
+        setGestionChambre(new GestionChambre(chambres, reservations,commodites));
         setGestionClient(new GestionClient(clients, reservations));
         setGestionCommodite(new GestionCommodite(commodites, reservations));
         setGestionReservation(new GestionReservation(reservations, chambres, clients));

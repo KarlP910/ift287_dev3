@@ -33,7 +33,7 @@ public class GestionReservation {
 
     /**
      * Affiche une liste des reservations faites par les clients
-     */
+
     public List<Reservation> listReservationClient(int idClient)
             throws SQLException, IFT287Exception,Exception{
         try {
@@ -50,7 +50,7 @@ public class GestionReservation {
             throw e;
         }
     }
-
+*/
     /**
      * Réserve une chambre à un client avec une date de debut et une date de fin (pt a mettre dans chambre)
      */

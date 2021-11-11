@@ -204,7 +204,7 @@ public class AubergeInn
                 else if (command.equals("inclureCommodite")) {
                     int idChambre = readInt(tokenizer);
                     int idCommodite = readInt(tokenizer);
-                    gestionSystem.getGestionChambre().inclureCommodite(idChambre,idCommodite,gestionSystem.getTableCommodite());
+                    gestionSystem.getGestionChambre().inclureCommodite(idChambre,idCommodite);
 
 
                 }
@@ -250,7 +250,22 @@ public class AubergeInn
                 // AFFICHER LES INFORMATIONS D'UN CLIENT AINSI QUE SES RÉSERVATIONS
                 // *********************
                 else if (command.equals("afficherClient")) {
-                    int idClient=readInt(tokenizer);
+
+                    int idClient = readInt(tokenizer);
+                    Client client = gestionSystem.getGestionClient().getClient(idClient);
+                    //il faut aujouter ;les autres attributs de clients
+                    System.out.println(client.getNom());
+                    //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
+
+
+
+
+
+
+
+
+
+              /*      int idClient=readInt(tokenizer);
                     Client client= gestionSystem.getGestionClient().afficherClient(idClient);
                     List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(idClient);
 
@@ -273,6 +288,8 @@ public class AubergeInn
                                     t.getDate_fin());
                         }
                     }
+                    */
+
                     //TODO
                 }
                 // *********************

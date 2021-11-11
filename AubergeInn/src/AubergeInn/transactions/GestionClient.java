@@ -79,25 +79,20 @@ public class GestionClient {
     /**
      * Affiche toutes les informations du client qui ont des réservations en cours et antérieure
      */
-    /*
-    public Client afficherClient(int idClient)
-            throws SQLException,IFT287Exception,Exception{
-        try {
-            if (!clients.existe(idClient))
-                throw new IFT287Exception("Le client " + idClient + " n'existe pas");
+    public Client getClient(int idClient) throws SQLException, IFT287Exception, Exception
+    {
+        try
+        {
+            cx.demarreTransaction();
 
-
+            Client client = clients.getClient(idClient);
+            if (client == null)
+                throw new IFT287Exception("Le client n'existe pas.");
             cx.commit();
-            return clients.afficherClient(idClient);
-
-        }
-        catch(Exception e){
+            return client;
+        } catch (Exception e) {
             cx.rollback();
             throw e;
         }
-
-
     }
-    */
-
 }

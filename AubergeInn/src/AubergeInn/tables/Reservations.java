@@ -25,7 +25,7 @@ public class Reservations {
             stmtExiste = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_clients = : client", Reservation.class);
             stmtExisteChambre = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre", Reservation.class);
             stmtExisteClient = cx.getConnection().createQuery("select r from Reservation r where r.m_clients = :client", Reservation.class);
-            stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_date_debut <= :date and r.m_date_fin >:date", Reservation.class);
+            stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_date_debut <= :Date and r.m_date_fin > :Date", Reservation.class);
 
 
         }

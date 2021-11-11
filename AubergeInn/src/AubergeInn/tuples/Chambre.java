@@ -16,6 +16,7 @@ public class Chambre {
     private String c_type_lit;
     private String c_nom_chambre;
     private float c_prix_base;
+    @OneToMany
     private ArrayList<Commodite> listeCommodites;
 
 
@@ -39,7 +40,9 @@ public class Chambre {
 
     }
 
+    public Chambre() {
 
+    }
 
 
     /***

@@ -6,7 +6,10 @@ import AubergeInn.tables.Clients;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 public class Reservation {
 
@@ -17,6 +20,11 @@ public class Reservation {
 
     private Chambre m_chambres;
     private Client m_clients;
+    // Iici la solution que jai, c'est faire des list et de mettre @OneToMany
+    //@OneToMany
+    //private List<Chambre> m_chambres;
+    //@OneToMany
+    //private List<Client> m_clients;
 
     public Reservation(){
 

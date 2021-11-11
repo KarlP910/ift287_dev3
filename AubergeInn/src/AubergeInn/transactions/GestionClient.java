@@ -74,9 +74,12 @@ public class GestionClient {
         }
     }
 
+
+
     /**
      * Affiche toutes les informations du client qui ont des réservations en cours et antérieure
      */
+    /*
     public Client afficherClient(int idClient)
             throws SQLException,IFT287Exception,Exception{
         try {
@@ -95,5 +98,6 @@ public class GestionClient {
 
 
     }
+    */
 
 }

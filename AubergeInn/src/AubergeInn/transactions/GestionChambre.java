@@ -92,9 +92,6 @@ public class GestionChambre {
     public List<Commodite> afficherChambreCommodite(int idChambre)
             throws SQLException, IFT287Exception, Exception {
 
-
-
-
         try {
             cx.demarreTransaction();
 

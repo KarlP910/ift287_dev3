@@ -75,7 +75,7 @@ public class Chambre {
         listeCommodites.remove(commodite);
     }
     public List<Commodite> getAllCommodite(){
-        listeCommodites = new ArrayList<Commodite>();
+        //listeCommodites = new ArrayList<Commodite>();
         return listeCommodites;
     }
 

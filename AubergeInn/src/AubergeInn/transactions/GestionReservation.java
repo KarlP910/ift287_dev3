@@ -68,6 +68,10 @@ public class GestionReservation {
             //Reservation reservation = this.reservation.getReservation(idChambre, dateDebut, dateFin);
             if(dateDebut.after(dateFin))
                 throw new IFT287Exception("La date de la reservation n'est pas valide.");
+            if( client == null)
+                throw new IFT287Exception("Le client n'existe pas");
+            if (chambre == null)
+                throw new IFT287Exception("la chambre n'existe pas");
             //if(reservation != null)
               //  throw new IFT287Exception("Il y a un conflit avec une autre reservation");
 

@@ -52,7 +52,7 @@ public class AubergeInn
 
     private static GestionSystem gestionSystem;
     private static Connexion cx;
-    private boolean echo;
+    private static boolean echo;
     private static SimpleDateFormat formatAMJ;
 
     /**
@@ -429,7 +429,12 @@ public class AubergeInn
      */
     static String lireTransaction(BufferedReader reader) throws IOException
     {
-        return reader.readLine();
+        System.out.print("> ");
+        String transaction = reader.readLine();
+        // Echo si lecture dans un fichier
+        if (echo)
+            System.out.println(transaction);
+        return transaction;
     }
 
     /**

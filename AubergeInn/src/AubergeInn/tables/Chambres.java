@@ -32,7 +32,7 @@ public class Chambres {
 
     public Chambres(Connexion cx) {
 
-        
+        this.cx = cx;
         stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
 
        // stmtUpdateCommodite = cx.getConnection().createQuery("select l from Chambre l where l.c_idCommodite = :Commodite", Chambre.class);

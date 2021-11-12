@@ -209,14 +209,16 @@ public class GestionChambre {
         List<Chambre> c = chambres.afficherChambreLibre();
         Calendar calendar = Calendar.getInstance();
         for (Chambre ci : c) {
-            if (ci.getLouer() != null) {
-                if (ci.getDateLouer().before(calendar.getTime())) {
-                    System.out.println(ci.toString());
-                }
+            if (ci.getLouer() == null) {
+                System.out.println(ci.toString());
             }
+
+
+            }
+        cx.commit();
         }
 
-        cx.commit();
+
 
 
 
@@ -243,7 +245,7 @@ public class GestionChambre {
         }
 
          */
-}
+
     public Chambre getEntiteChambre(int idChambre) throws SQLException, IFT287Exception, Exception
     {
         try

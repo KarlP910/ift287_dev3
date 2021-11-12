@@ -256,6 +256,7 @@ public class AubergeInn
 
                     int idClient = readInt(tokenizer);
                     Client client = gestionSystem.getGestionClient().getClient(idClient);
+                   // List<Reservation> listreReserv = gestionSystem.getGestionReservation().
                     //il faut aujouter ;les autres attributs de clients
                     System.out.println("\n"+client.getIdClient());
                     System.out.println(client.getPrenom());
@@ -263,12 +264,6 @@ public class AubergeInn
                     System.out.println(client.getAge());
 
                     //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
-
-
-
-
-
-
 
 
 

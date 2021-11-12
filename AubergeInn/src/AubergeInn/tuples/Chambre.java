@@ -14,15 +14,13 @@ public class Chambre {
 
     @Id
     @GeneratedValue
-    private long c_id;
     private int c_idChambre;
     private String c_type_lit;
     private String c_nom_chambre;
     private float c_prix_base;
+
     @OneToMany
     private ArrayList<Commodite> listeCommodites;
-
-
 
     // PAS SUR DU TOUT
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,16 +28,18 @@ public class Chambre {
     private boolean idChambreNull;
     private Date c_datePret;
 
+
     //public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base, ArrayList<Commodite> listeCommodites)
     public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base) {
-        this.c_idChambre = idChambre;
+        c_idChambre = idChambre;
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
+        listeCommodites=new ArrayList<Commodite>();
     }
 
     public Chambre() {
-
+        listeCommodites=new ArrayList<Commodite>();
     }
 
 
@@ -65,21 +65,6 @@ public class Chambre {
     public float getPrix_base(){ return this.c_prix_base;}
 
     public void setPrix_base(Float prix_base){ this.c_prix_base=prix_base;}
-
-
-
-    public boolean isIdChambreNull() {
-        return idChambreNull;
-    }
-
-    public Reservation getLouer() {
-
-        return idReservation;
-    }
-
-    public Date getDateLouer() {
-        return c_datePret;
-    }
 
     public void inclureCommodite(Commodite commodite) {
         this.listeCommodites = new ArrayList<Commodite>();

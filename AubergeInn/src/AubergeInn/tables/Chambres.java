@@ -41,9 +41,7 @@ public class Chambres {
 
         this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
-        //TODO
-        this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.idReservation is null", Chambre.class);
-     
+
 
 
 
@@ -113,18 +111,8 @@ public class Chambres {
         return false;
 
     }
-    /** A faire
-     * Affiche une chambre
-     */
-    public List<Chambre> afficherChambre(int idChambre)
-    throws SQLException{
 
-        stmtAfficherChambre.setParameter("idChambre", idChambre);
-        //stmtAfficherChambre.setParameter("idChambre", idChambre);
-        List<Chambre> chambres = stmtAfficherChambre.getResultList();
-        return chambres;
 
-    }
     public List<Chambre> afficherChambreLibre()
             throws SQLException {
         //stmtAfficherChambre.setParameter("idChambre", idChambre);
@@ -156,29 +144,12 @@ public class Chambres {
      * A faire
      */
 
-    /*
-    public List<Chambre> getAll() throws SQLException
+
+    public List<Commodite> getAllCommodites(Chambre c) throws SQLException
     {
 
-        ResultSet rset = stmtSelectAll.executeQuery();
-
-        List<Chambre> listeChambre= new LinkedList<Chambre>();
-        while (rset.next())
-        {
-            Chambre chambre = new Chambre(rset.getInt("idChambre"),
-                    rset.getString("nom_chambre"),
-                    rset.getString("type_lit"),
-                    rset.getFloat("prix_base"),
-                    rset.getInt("idCommodite")//nom_chambre, type_lit,prix_base,idCommodite
-            );
-
-            listeChambre.add(chambre);
-        }
-        rset.close();
-        return listeChambre;
+       return c.getAllCommodite();
     }
-
-     */
 
   // Vu qu'on est dans le modèle object une chambre a un attribut de commdité, alors c'est tout a fait normal d'avoir commodité pour un object chambre
 

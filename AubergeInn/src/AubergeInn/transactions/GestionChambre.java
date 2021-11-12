@@ -5,13 +5,9 @@ import AubergeInn.IFT287Exception;
 import AubergeInn.tables.*;
 import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Commodite;
-import AubergeInn.tuples.TupleService;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class GestionChambre {
@@ -100,7 +96,7 @@ public class GestionChambre {
                 throw new IFT287Exception("La chambre n'existe pas");
             }
             cx.commit();
-            return  chambre.getAllCommodite();
+            return  chambres.getAllCommodites(chambre);
 
 
         } catch (Exception e) {
@@ -120,11 +116,17 @@ public class GestionChambre {
     public Chambre afficherChambre(int idChambre)
             throws SQLException, IFT287Exception, Exception {
 
-        cx.demarreTransaction();
+        try {
+            cx.demarreTransaction();
 
-        Chambre c = chambres.getChambre(idChambre);
-        cx.commit();
-        return c;
+            Chambre c = chambres.getChambre(idChambre);
+
+            cx.commit();
+            return c;
+        }catch (Exception e){
+            cx.rollback();
+            throw e;
+        }
 
 
     }
@@ -161,7 +163,7 @@ public class GestionChambre {
             if (comm == null)
                 throw new IFT287Exception("La commodite n'existe pas");
 
-           chambre.inclureCommodite(comm);
+            chambres.inclureCommodite(chambre,comm);
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
@@ -201,23 +203,6 @@ public class GestionChambre {
     }
 
 */
-    public void afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
-
-
-        cx.demarreTransaction();
-
-        List<Chambre> c = chambres.afficherChambreLibre();
-        Calendar calendar = Calendar.getInstance();
-        for (Chambre ci : c) {
-            if (ci.getLouer() == null) {
-                System.out.println(ci.toString());
-            }
-
-
-            }
-        cx.commit();
-        }
-
 
 
 

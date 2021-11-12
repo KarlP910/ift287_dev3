@@ -82,9 +82,11 @@ public class Chambre {
     }
 
     public void inclureCommodite(Commodite commodite) {
+        this.listeCommodites = new ArrayList<Commodite>();
         listeCommodites.add(commodite);
     }
     public void enleverCommodite(Commodite commodite) {
+        //this.listeCommodites = new ArrayList<Commodite>();
         listeCommodites.remove(commodite);
     }
 

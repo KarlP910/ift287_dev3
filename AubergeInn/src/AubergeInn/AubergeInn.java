@@ -305,12 +305,12 @@ public class AubergeInn
                     Chambre b=gestionSystem.getGestionChambre().afficherChambre(idChambre);
                     System.out.println("\nNuméro de chambre\tNom\tType de lit\tPrix\t\n"+b.getIdChambre()+"\t"+b.getNom_chambre()+"\t"+b.getType_lit()+"\t"+b.getPrix_base());
                     List<Commodite> listeCommodite= gestionSystem.getGestionChambre().afficherChambreCommodite(idChambre);
-                   // if(!listeCommodite.isEmpty()) {
+                    if(!listeCommodite.isEmpty()) {
                         System.out.println("\nidCommodite\tdescription\tprix");
                         for (Commodite commo : listeCommodite) {
                             System.out.println(commo.getIdCommodite() + "\t" + commo.getDescription() + "\t" + commo.getSurplus_prix() + "\t");
                         }
-                //    }
+                   }
                     /*.out.println(commo.getIdCommodite() + "\t" + commo.getDescription() + "\t" + commo.getSurplus_prix() + "\t");
                         }
 

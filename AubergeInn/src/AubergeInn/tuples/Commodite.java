@@ -7,7 +7,6 @@ public class Commodite {
 
     @Id
     @GeneratedValue
-    private long c_id;
     private int m_idCommodite;
     private String m_description;
     private Float m_surplus_prix;

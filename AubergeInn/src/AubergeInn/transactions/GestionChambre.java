@@ -95,8 +95,9 @@ public class GestionChambre {
             if(chambre==null){
                 throw new IFT287Exception("La chambre n'existe pas");
             }
+            List<Commodite> listeCommodites=chambres.getAllCommodites(chambre);
             cx.commit();
-            return  chambres.getAllCommodites(chambre);
+            return  listeCommodites;
 
 
         } catch (Exception e) {

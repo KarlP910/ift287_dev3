@@ -10,8 +10,6 @@ public class Client {
 
     @Id
     @GeneratedValue
-    private long m_id;
-
     private int m_idClient;
     private String m_prenom;
     private String m_nom;

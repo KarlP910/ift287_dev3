@@ -25,7 +25,7 @@ public class Chambre {
     // PAS SUR DU TOUT
     @ManyToOne(fetch = FetchType.LAZY)
     private Reservation idReservation;
-    private boolean idChambreNull;
+
     private Date c_datePret;
 
 

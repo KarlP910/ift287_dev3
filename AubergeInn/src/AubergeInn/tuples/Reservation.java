@@ -3,10 +3,7 @@ package AubergeInn.tuples;
 import AubergeInn.tables.Chambres;
 import AubergeInn.tables.Clients;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -18,7 +15,9 @@ public class Reservation {
     private Date m_date_debut;
     private Date m_date_fin;
 
+    @OneToOne
     private Chambre m_chambres;
+    @OneToOne
     private Client m_clients;
     // Iici la solution que jai, c'est faire des list et de mettre @OneToMany
     //@OneToMany

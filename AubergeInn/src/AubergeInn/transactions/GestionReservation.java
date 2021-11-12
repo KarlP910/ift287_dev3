@@ -35,18 +35,15 @@ public class GestionReservation {
 
 
 
-    /**
-     * Affiche une liste des reservations faites par les clients
-
-    public List<Reservation> listReservationClient(int idClient)
+    public List<Reservation> listReservationClient(Client c)
             throws SQLException, IFT287Exception,Exception{
         try {
-            if (!clients.existe(idClient))
-                throw new IFT287Exception("Le client" + idClient + " n'existe pas");
+            cx.demarreTransaction();
 
-                List<Reservation> reserv=reservation.listeReservationClient(idClient);
+
+            List<Reservation> reserv=reservation.listeReservationClient(c);
             cx.commit();
-            return reservation.listeReservationClient(idClient);
+            return reserv;
 
         }
         catch(Exception e){
@@ -54,7 +51,7 @@ public class GestionReservation {
             throw e;
         }
     }
-*/
+
     /**
      * Réserve une chambre à un client avec une date de debut et une date de fin (pt a mettre dans chambre)
      */

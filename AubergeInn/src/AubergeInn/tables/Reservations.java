@@ -93,41 +93,18 @@ public class Reservations {
         }
         return null;
     }
-    /**
-     * Lecture de la réservation d'un client
-     */
-    public Reservation getReservationClient(Client client) throws SQLException
-    {
-        stmtExisteClient.setParameter("client", client);
-        List<Reservation> reservations = stmtExisteClient.getResultList();
-        if(!reservations.isEmpty())
-        {
-            return reservations.get(0);
-        }
-        return null;
-    }
-    /**
-     * Lecture d'une liste de reservation de client
 
-    public List<Reservation> listeReservationClient(int idClient) throws SQLException
+    public List<Reservation> listeReservationClient(Client c) throws SQLException
     {
-        stmtExisteClient.setInt(1, idClient);
-        ResultSet rset = stmtExisteClient.executeQuery();
-        List<Reservation> listeReserv=new LinkedList<Reservation>();
-        //idClient,idChambre, date_debut, date_fin
-        while (rset.next())
-        {
-         //   Reservation reservation = new Reservation(
-                  //  rset.getInt("idClient"),
-                  //  rset.getInt("idChambre"),
-            //        rset.getDate("date_debut"),
-            //        rset.getDate("date_fin"));
-        //   listeReserv.add(reservation);
-        }
-       rset.close();
-        return listeReserv;
-    }
+        stmtExisteClient.setParameter("client", c);
+        List<Reservation> reservations=stmtExisteClient.getResultList();
+        if (reservations == null) {
 
+            return null;
+        }
+        return reservations;
+    }
+/*
     public ArrayList<Integer> getAllChambre(Date date) throws SQLException
     {
         ArrayList<Integer> listeChambre= new ArrayList<Integer>();

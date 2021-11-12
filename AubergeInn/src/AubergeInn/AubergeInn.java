@@ -258,12 +258,30 @@ public class AubergeInn
                     Client client = gestionSystem.getGestionClient().getClient(idClient);
                    // List<Reservation> listreReserv = gestionSystem.getGestionReservation().
                     //il faut aujouter ;les autres attributs de clients
-                    System.out.println("\n"+client.getIdClient());
-                    System.out.println(client.getPrenom());
-                    System.out.println(client.getNom());
-                    System.out.println(client.getAge());
+                    System.out.println("\nidClient\tPrenom\tNom\tAge");
+                    System.out.println(client.getIdClient()+"\t"+client.getPrenom()+"\t"+client.getNom()+"\t"+client.getAge());
+                    List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(client);
 
-                    //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
+                    System.out.println("\nidClient\tprenom\tnom\tage\tnomChambre\tPrix\tdate début\tdate départ");
+                    if(listreserv.isEmpty()){
+                        // System.out.println("idClient,Prenom, Nom, Age");
+                        System.out.println(client.getIdClient()+ " "+
+                                client.getPrenom()+ " "+
+                                client.getNom()+ " "+
+                                client.getAge()+ " ");
+                    }
+                    else {
+                        for (Reservation t : listreserv) {
+                            System.out.println(client.getIdClient() + "\t " +
+                                    client.getPrenom() + "\t " +
+                                    client.getNom() + " \t" +
+                                    client.getAge() + " \t" +
+                                    t.getChambre().getNom_chambre() + " \t" +
+                                    t.getChambre().getPrix_base()+" \t"+
+                                    t.getDate_debut() + " \t" +
+                                    t.getDate_fin());
+                        }
+                        //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
 
 
 
@@ -292,7 +310,7 @@ public class AubergeInn
                     }
                     */
 
-                    //TODO
+                    }//TODO
                 }
                 // *********************
                 // AFFICHER LES INFORMATIONS D'UNE CHAMBRE ET DE SES COMMODITÉS

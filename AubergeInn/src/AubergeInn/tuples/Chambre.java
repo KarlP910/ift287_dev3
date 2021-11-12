@@ -23,6 +23,7 @@ public class Chambre {
     private ArrayList<Commodite> listeCommodites;
 
 
+
     // PAS SUR DU TOUT
     @ManyToOne(fetch = FetchType.LAZY)
     private Reservation idReservation;
@@ -35,6 +36,7 @@ public class Chambre {
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
+        this.listeCommodites = new ArrayList<Commodite>();
     }
 
     public Chambre() {

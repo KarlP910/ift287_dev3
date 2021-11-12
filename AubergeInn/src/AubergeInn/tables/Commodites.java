@@ -25,15 +25,7 @@ public class Commodites {
 
         stmtExiste=cx.getConnection().createQuery("select c from Commodite c where c.m_idCommodite = :idCommodite",Commodite.class);
         //   stmtInsert=cx.getConnection().createQuery("select c from Commodite c where c.m_idCommodite = :idCommodite",Commodites.class);
-     /*   stmtInsert =cx.getConnection().prepareStatement(
-                "insert into commodite(idCommodite, description, surplus_prix) "+ " values(?,?,?)");
-        stmtUpdate=cx.getConnection().prepareStatement(
-                "update commodite set idCommodite = ?"); //inclure une commodité
-        stmtDelete=cx.getConnection().prepareStatement(
-                "delete from commodite where idCommodite = ?");
-        //stmtExisteCommoddite=cx.getConnection().prepareStatement(
-               // "select idClient, prenom, nom, age,idReservation from client where idReservation=?");
-*/
+
     }
     /**
      * Vérifie si une commodité existe dans le système
@@ -52,8 +44,8 @@ public class Commodites {
      */
     public Commodite getCommodite(int idCommodite)
             throws SQLException{
-        this.stmtExiste.setParameter("idCommodite",idCommodite);
-        List<Commodite> commodites = this.stmtExiste.getResultList();
+        stmtExiste.setParameter("idCommodite",idCommodite);
+        List<Commodite> commodites = stmtExiste.getResultList();
         if(!commodites.isEmpty())
         {
             return commodites.get(0);

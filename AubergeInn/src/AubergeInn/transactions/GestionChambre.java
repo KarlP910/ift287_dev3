@@ -161,11 +161,8 @@ public class GestionChambre {
                 throw new IFT287Exception("La chambre n'existe pas");
             if (comm == null)
                 throw new IFT287Exception("La commodite n'existe pas");
-        //    TupleService tupleService = service.getService(idChambre, idCommodite);
-         //   if (tupleService != null)
-         //       throw new IFT287Exception("Ce service existe deja.");
 
-           chambres.inclureCommodite(chambre, comm);
+           chambre.inclureCommodite(comm);
             cx.commit();
         } catch (Exception e) {
             cx.rollback();

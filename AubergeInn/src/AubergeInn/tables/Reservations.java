@@ -55,10 +55,18 @@ public class Reservations {
         /* Ajout de la reservation. */
       cx.getConnection().persist(r);
     }
-
-    public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
+    public Reservation getReservation(int idReservation)throws SQLException
+    //public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
     {
+        stmtExiste.setParameter("idReservation", idReservation);
+        List<Reservation> reservations = stmtExiste.getResultList();
+        if(!reservations.isEmpty())
+        {
+            return reservations.get(0);
+        }
+        return null;
 
+        /*
         stmtExisteReservation.setParameter("idChambre", idChambre);
         stmtExisteReservation.setParameter("debut", debut);
         stmtExisteReservation.setParameter("fin", fin);
@@ -69,30 +77,32 @@ public class Reservations {
         }
         return null;
 
+         */
+
     }
     /**
      * Lecture de la réservation d'une chambre
      */
-    public List<Reservation> getReservationChambre(Chambre chambre) throws SQLException
+    public Reservation getReservationChambre(Chambre chambre) throws SQLException
     {
         stmtExisteChambre.setParameter("chambre", chambre);
         List<Reservation> reservations = stmtExisteChambre.getResultList();
         if(!reservations.isEmpty())
         {
-            return reservations;
+            return reservations.get(0);
         }
         return null;
     }
     /**
      * Lecture de la réservation d'un client
      */
-    public List<Reservation> getReservationClient(Client clients) throws SQLException
+    public Reservation getReservationClient(Client client) throws SQLException
     {
-        stmtExisteClient.setParameter("clients", clients);
+        stmtExisteClient.setParameter("client", client);
         List<Reservation> reservations = stmtExisteClient.getResultList();
         if(!reservations.isEmpty())
         {
-            return reservations;
+            return reservations.get(0);
         }
         return null;
     }

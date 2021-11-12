@@ -5,6 +5,8 @@ import AubergeInn.IFT287Exception;
 import AubergeInn.tables.Chambres;
 import AubergeInn.tables.Clients;
 import AubergeInn.tables.Reservations;
+import AubergeInn.tuples.Chambre;
+import AubergeInn.tuples.Client;
 import AubergeInn.tuples.Reservation;
 
 import java.sql.Date;
@@ -17,6 +19,8 @@ public class GestionReservation {
     private Reservations reservation;
     private Clients clients;
     private Chambres chambres;
+    private Client Client;
+
 
     public GestionReservation(Reservations reservation, Chambres chambres, Clients clients) throws IFT287Exception{
 
@@ -59,14 +63,18 @@ public class GestionReservation {
     {
         try{
             cx.demarreTransaction();
-            Reservation reservation = this.reservation.getReservation(idChambre, dateDebut, dateFin);
+            Chambre chambre = chambres.getChambre(idChambre);
+            Client client = clients.getClient(idClient);
+            //Reservation reservation = this.reservation.getReservation(idChambre, dateDebut, dateFin);
             if(dateDebut.after(dateFin))
                 throw new IFT287Exception("La date de la reservation n'est pas valide.");
-            if(reservation != null)
-                throw new IFT287Exception("Il y a un conflit avec une autre reservation");
+            //if(reservation != null)
+              //  throw new IFT287Exception("Il y a un conflit avec une autre reservation");
 
+            Reservation r = new Reservation(client,chambre,dateDebut,dateFin);
            // this.reservation.reserver(idClient,idChambre,dateDebut,dateFin);
 
+            reservation.reserver(r);
             //Commit
             cx.commit();
         }

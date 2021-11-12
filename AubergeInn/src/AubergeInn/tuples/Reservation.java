@@ -19,11 +19,6 @@ public class Reservation {
     private Chambre m_chambres;
     @OneToOne
     private Client m_clients;
-    // Iici la solution que jai, c'est faire des list et de mettre @OneToMany
-    //@OneToMany
-    //private List<Chambre> m_chambres;
-    //@OneToMany
-    //private List<Client> m_clients;
 
     public Reservation(){
 

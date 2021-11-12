@@ -8,6 +8,8 @@ import AubergeInn.tuples.Commodite;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GestionChambre {
@@ -132,41 +134,36 @@ public class GestionChambre {
 
     }
 
-    public void afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
+    public List<Chambre> afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
+
+        try {
 
 
         cx.demarreTransaction();
 
-        List<Chambre> c = chambres.afficherChambreLibre();
-        Calendar calendar = Calendar.getInstance();
-        for (Chambre ci : c) {
+        List<Chambre> listeChambre = chambres.afficherChambreLibre();
+        List<Chambre> listBonneChambre=new LinkedList<Chambre>();
+        Date calendar = Calendar.getInstance().getTime();
+        for (Chambre ci : listeChambre) {
             //if (ci.getLouer() == null) {
-                System.out.println(ci.toString());
-            }
+         //   if(!reserv.getReservationChambre(ci).getDate_debut().after(calendar) && !reserv.getReservationChambre(ci).getDate_fin().before(calendar)){
+         //       listBonneChambre.add(ci);
+        //    }
+            // if(reserv.getReservationChambre(ci).getDate_debut()!=null || reserv.getReservationChambre(ci).getDate_fin()!=null){
+             if(reserv.getReservationChambre(ci)==null)
+                listBonneChambre.add(ci);
+         //   }
+        }
 
 
-      //  }
+        //  }
         cx.commit();
-    }
-
-    /*
-        try{
-            if(chambres.existe(idChambre)){
-
-                cx.commit();
-                return chambres.afficherChambre(idChambre);
-            }
-            else{
-                throw new IFT287Exception("La chambre que vous voulez affichez n'existe pas "+ idChambre);
-            }
-
-
-        }catch (Exception e){
+        return listBonneChambre;
+    }catch (Exception e){
             cx.rollback();
             throw e;
         }
-
-     */
+    }
 
     public void inclureCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {

@@ -2,7 +2,6 @@ package AubergeInn.tuples;
 
 import javax.persistence.*;
 
-import java.security.PublicKey;
 
 @Entity
 public class Client {

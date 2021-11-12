@@ -226,8 +226,14 @@ public class AubergeInn
                 else if (command.equals("afficherChambresLibres")) {
                     //TODO
 
-                    //Date dateCourante = readDate(tokenizer);
-                   // gestionSystem.getGestionChambre().afficherChambresLibres();
+
+
+
+                   List<Chambre>listChambre= gestionSystem.getGestionChambre().afficherChambresLibres();
+                    System.out.println("\nidChambre\tnom\ttype de lit\tprix total");
+                   for(Chambre c:listChambre){
+                       System.out.println(c.getIdChambre()+"\t"+c.getNom_chambre()+"\t"+c.getType_lit()+"\t"+c.getPrix_base());
+                   }
 
                 //    gestionSystem.getGestionReservation().afficherChambreVide();
 
@@ -285,31 +291,6 @@ public class AubergeInn
 
 
 
-              /*      int idClient=readInt(tokenizer);
-                    Client client= gestionSystem.getGestionClient().afficherClient(idClient);
-                    List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(idClient);
-
-                    System.out.println("\nidClient\tprenom\tnom\tage\tdate début\tdate départ");
-                    if(listreserv.isEmpty()){
-                       // System.out.println("idClient,Prenom, Nom, Age");
-                        System.out.println(client.getIdClient()+ " "+
-                                client.getPrenom()+ " "+
-                                client.getNom()+ " "+
-                                client.getAge()+ " ");
-                    }
-                    else {
-                        for(Reservation t : listreserv){
-                            System.out.println(client.getIdClient()+ "\t "+
-                                    client.getPrenom()+ "\t "+
-                                    client.getNom()+ " \t"+
-                                    client.getAge()+ " \t"+
-                                    t.getIdChambre()+ " \t"+
-                                    t.getDate_debut()+" \t"+
-                                    t.getDate_fin());
-                        }
-                    }
-                    */
-
                     }//TODO
                 }
                 // *********************
@@ -329,23 +310,7 @@ public class AubergeInn
                             System.out.println(commo.getIdCommodite() + "\t" + commo.getDescription() + "\t" + commo.getSurplus_prix() + "\t");
                         }
                    }
-                    /*.out.println(commo.getIdCommodite() + "\t" + commo.getDescription() + "\t" + commo.getSurplus_prix() + "\t");
-                        }
 
-                    int idChambre=readInt(tokenizer);
-                    Chambre tchambre= gestionSystem.getGestionChambre().afficherChambre(idChambre);
-                    System.out.println("\nidChambre\tnom\ttype de lit\tprix");
-                    System.out.println(tchambre.getIdChambre() + "\t" + tchambre.getNom_chambre()+ "\t" + tchambre.getType_lit()+ "\t" + tchambre.getPrix_base());
-                    List<Commodite> listeCommodite = gestionSystem.getGestionChambre().getListeCommodite(idChambre, gestionSystem.getTableCommodite());
-
-                    if(!listeCommodite.isEmpty()) {
-                        System.out.println("\nidCommodite\tdescription\tprix");
-                        for (Commodite commo : listeCommodite) {
-                            System
-                    }
-
-
-                     */
                 }
                 // *********************
                 // RÉSERVE UNE CHAMBRE PAR UN CLIENT

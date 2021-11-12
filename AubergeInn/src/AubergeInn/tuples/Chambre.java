@@ -1,11 +1,7 @@
 package AubergeInn.tuples;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -22,10 +18,6 @@ public class Chambre {
     @OneToMany
     private ArrayList<Commodite> listeCommodites;
 
-
-
-
-    //public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base, ArrayList<Commodite> listeCommodites)
     public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base) {
         c_idChambre = idChambre;
         this.c_type_lit = type_lit;
@@ -37,7 +29,6 @@ public class Chambre {
     public Chambre() {
         listeCommodites=new ArrayList<Commodite>();
     }
-
 
     /***
      * DAPRES MOI ICI ON VA POUVOIR ENLEVER TOUTE LES SETTERS
@@ -71,7 +62,6 @@ public class Chambre {
         listeCommodites.remove(commodite);
     }
     public List<Commodite> getAllCommodite(){
-        //listeCommodites = new ArrayList<Commodite>();
         return listeCommodites;
     }
 

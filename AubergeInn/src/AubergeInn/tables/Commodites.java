@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Commodites {
 
-    //   private final PreparedStatement stmtExisteReserv;
+
     private TypedQuery<Commodite> stmtExiste;
     private TypedQuery<Commodite> stmtUpdate;
     private TypedQuery<Commodite> stmtDelete;
@@ -22,10 +22,7 @@ public class Commodites {
 
     public Commodites(Connexion cx) throws SQLException {
         this.cx=cx;
-
         stmtExiste=cx.getConnection().createQuery("select c from Commodite c where c.m_idCommodite = :idCommodite",Commodite.class);
-        //   stmtInsert=cx.getConnection().createQuery("select c from Commodite c where c.m_idCommodite = :idCommodite",Commodites.class);
-
     }
     /**
      * Vérifie si une commodité existe dans le système

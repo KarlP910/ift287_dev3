@@ -33,51 +33,22 @@ public class Reservations {
         return cx;
     }
 
-/*
-    public boolean existe(Clients clients, Chambres chambres) throws SQLException
-    {
-
-        stmtExiste.setParameter("1", chambres);
-        stmtExiste.setParameter("2", clients);
-        return !stmtExiste.getResultList().isEmpty();
-    }
-
-
- */
-    public boolean existe(int idReservation)
-    {
-        stmtExiste.setParameter("idReservation", idReservation);
-        return !stmtExiste.getResultList().isEmpty();
-    }
-
     public void reserver(Reservation r) throws SQLException
     {
         /* Ajout de la reservation. */
       cx.getConnection().persist(r);
     }
-    public Reservation getReservation(int idReservation)throws SQLException
-    //public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
+    public Reservation getReservation(Chambre c,Date date_debut, Date date_fin)throws SQLException
     {
-        stmtExiste.setParameter("idReservation", idReservation);
-        List<Reservation> reservations = stmtExiste.getResultList();
-        if(!reservations.isEmpty())
-        {
-            return reservations.get(0);
-        }
-        return null;
-
-        /*
-        stmtExisteReservation.setParameter("idChambre", idChambre);
-        stmtExisteReservation.setParameter("debut", debut);
-        stmtExisteReservation.setParameter("fin", fin);
+        stmtExisteReservation.setParameter("chambre", c);
+        stmtExisteReservation.setParameter("Date", date_debut);
+        stmtExisteReservation.setParameter("Date", date_fin);
         List<Reservation> reservations = stmtExisteReservation.getResultList();
         if(!reservations.isEmpty())
         {
             return reservations.get(0);
         }
         return null;
-
-         */
 
     }
     /**
@@ -98,30 +69,10 @@ public class Reservations {
     {
         stmtExisteClient.setParameter("client", c);
         List<Reservation> reservations=stmtExisteClient.getResultList();
-        if (reservations == null) {
 
-            return null;
-        }
         return reservations;
     }
-/*
-    public ArrayList<Integer> getAllChambre(Date date) throws SQLException
-    {
-        ArrayList<Integer> listeChambre= new ArrayList<Integer>();
 
-        stmtGetAllChambre.setDate(1, date);
-        stmtGetAllChambre.setDate(2, date);
-
-        ResultSet rset = stmtGetAllChambre.executeQuery();
-
-        while (rset.next())
-        {
-            listeChambre.add(rset.getInt(1));
-        }
-        rset.close();
-        return listeChambre;
-    }
-     */
 }
 
 

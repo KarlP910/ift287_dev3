@@ -34,10 +34,10 @@ public class GestionCommodite {
 
 
             //Ajoute le client dans la base de données
-            this.commodites.ajouterCommodite(c);
+            commodites.ajouterCommodite(c);
 
             //Commit
-            this.cx.commit();
+            cx.commit();
         }
         catch (Exception e)
         {
@@ -49,11 +49,11 @@ public class GestionCommodite {
     {
         try
         {
-            Commodite tupleCommodite = this.commodites.getCommodite(id);
+            Commodite tupleCommodite = commodites.getCommodite(id);
             if (tupleCommodite == null)
                 throw new IFT287Exception("La commodite n'existe deja.");
 
-            Commodite commodite = this.commodites.getCommodite(id);
+            Commodite commodite = commodites.getCommodite(id);
             cx.commit();
             return commodite.getSurplus_prix();
         }

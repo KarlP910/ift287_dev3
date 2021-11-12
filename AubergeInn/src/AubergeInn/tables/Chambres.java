@@ -11,43 +11,21 @@ import java.util.List;
 public class Chambres {
 
     private Connexion cx;
-    /*
-    private final PreparedStatement stmtExiste;
-    private final PreparedStatement stmtInsert;
-    private final PreparedStatement stmtUpdate;
-    private final PreparedStatement stmtDelete;
-    private final PreparedStatement stmtUpdateCommodite;
-    private final PreparedStatement  stmtSelectAll;
-    */
-    private TypedQuery<Chambre> stmtExiste;
 
-    private TypedQuery<Chambre> stmtUpdateCommodite;
+    private TypedQuery<Chambre> stmtExiste;
     private TypedQuery<Chambre> stmtSelectAll;
     private TypedQuery<Chambre> stmtAfficherChambre;
-    private TypedQuery<Chambre> stmtAfficherChambreLibre;
-
-
-
-
 
     public Chambres(Connexion cx) {
 
         this.cx = cx;
         this.stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
 
-       // stmtUpdateCommodite = cx.getConnection().createQuery("select l from Chambre l where l.c_idCommodite = :Commodite", Chambre.class);
-
         this.stmtSelectAll = cx.getConnection().createQuery("select l from Chambre l", Chambre.class);
 
         this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
-      //  this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.idReservation is null", Chambre.class);
-
-
-
-
     }
-
 
     /**
      * Retourner la connexion associé
@@ -57,18 +35,14 @@ public class Chambres {
         return this.cx;
     }
 
-
-
     /**
     Vérifie si une chambre existe
      */
 
     public boolean existe(int idChambre) throws SQLException
     {
-
         this.stmtExiste.setParameter("idChambre", idChambre);
         return !stmtExiste.getResultList().isEmpty();
-
     }
 
     /**
@@ -102,7 +76,7 @@ public class Chambres {
     public List<Chambre> afficherChambreLibre()
             throws SQLException {
         //stmtAfficherChambre.setParameter("idChambre", idChambre);
-        List<Chambre> chambres = stmtAfficherChambreLibre.getResultList();
+        List<Chambre> chambres = stmtAfficherChambre.getResultList();
         return chambres;
     }
 
@@ -123,13 +97,6 @@ public class Chambres {
 
 
     }
-
-
-
-    /**
-     * A faire
-     */
-
 
     public List<Commodite> getAllCommodites(Chambre c) throws SQLException
     {

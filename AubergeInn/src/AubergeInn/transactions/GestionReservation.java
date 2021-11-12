@@ -69,8 +69,8 @@ public class GestionReservation {
                 throw new IFT287Exception("Le client n'existe pas");
             if (chambre == null)
                 throw new IFT287Exception("la chambre n'existe pas");
-            //if(reservation != null)
-              //  throw new IFT287Exception("Il y a un conflit avec une autre reservation");
+            if(reservation.getReservation(chambre,dateDebut,dateFin)!=null)
+                throw new IFT287Exception("Il y a un conflit avec une autre reservation");
 
             Reservation r = new Reservation(client,chambre,dateDebut,dateFin);
            // this.reservation.reserver(idClient,idChambre,dateDebut,dateFin);

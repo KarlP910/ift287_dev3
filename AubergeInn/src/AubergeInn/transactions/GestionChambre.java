@@ -116,17 +116,15 @@ public class GestionChambre {
      *
      * @return
      */
-    public void afficherChambre(int idChambre)
+    public Chambre afficherChambre(int idChambre)
             throws SQLException, IFT287Exception, Exception {
 
         cx.demarreTransaction();
 
-        List<Chambre> c = chambres.afficherChambre(idChambre);
-
-        for (Chambre ci : c) {
-            System.out.println(ci.toString());
-        }
+        Chambre c = chambres.getChambre(idChambre);
         cx.commit();
+        return c;
+
 
     }
 
@@ -245,13 +243,14 @@ public class GestionChambre {
 
          */
 }
-    public Chambre getTupleChambre(int idChambre) throws SQLException, IFT287Exception, Exception
+    public Chambre getEntiteChambre(int idChambre) throws SQLException, IFT287Exception, Exception
     {
         try
         {
+            cx.demarreTransaction();
             Chambre chambre = chambres.getChambre(idChambre);
-            if(chambre == null)
-                throw new IFT287Exception("La chambre n'existe pas.");
+           // if(chambre == null)
+          //      throw new IFT287Exception("La chambre n'existe pas.");
 
             cx.commit();
             return chambre;

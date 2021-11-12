@@ -119,7 +119,7 @@ public class Chambres {
     public List<Chambre> afficherChambre(int idChambre)
     throws SQLException{
 
-        stmtExiste.setParameter("idChambre", idChambre);
+        stmtAfficherChambre.setParameter("idChambre", idChambre);
         //stmtAfficherChambre.setParameter("idChambre", idChambre);
         List<Chambre> chambres = stmtAfficherChambre.getResultList();
         return chambres;
@@ -135,11 +135,18 @@ public class Chambres {
     /**  A faire
      * Lecture d'une chambre
      */
-    public Chambre getChambre(int idChambre) throws SQLException {
+    public Chambre getChambre(int idChambre) {
 
-        this.stmtExiste.setParameter("idChambre", idChambre);
-        List<Chambre> chambres = this.stmtExiste.getResultList();
-        return !chambres.isEmpty() ? (Chambre)chambres.get(0) : null;
+        stmtExiste.setParameter("idChambre", idChambre);
+        List<Chambre> chambres = stmtExiste.getResultList();
+        if(!chambres.isEmpty()){
+            return chambres.get(0);
+        }
+        else
+        {
+            return null;
+        }
+
 
     }
 

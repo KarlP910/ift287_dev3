@@ -257,7 +257,7 @@ public class AubergeInn
                     int idClient = readInt(tokenizer);
                     Client client = gestionSystem.getGestionClient().getClient(idClient);
                     //il faut aujouter ;les autres attributs de clients
-                    System.out.println(client.getIdClient());
+                    System.out.println("\n"+client.getIdClient());
                     System.out.println(client.getPrenom());
                     System.out.println(client.getNom());
                     System.out.println(client.getAge());
@@ -306,7 +306,9 @@ public class AubergeInn
                     //TODO
 
                     int idChambre = readInt(tokenizer);
-                    gestionSystem.getGestionChambre().afficherChambre(idChambre);
+
+                    Chambre b=gestionSystem.getGestionChambre().afficherChambre(idChambre);
+                    System.out.println("\nNuméro de chambre\tNom\tType de lit\tPrix\t\n"+b.getIdChambre()+"\t"+b.getNom_chambre()+"\t"+b.getType_lit()+"\t"+b.getPrix_base());
 
                     /*
 

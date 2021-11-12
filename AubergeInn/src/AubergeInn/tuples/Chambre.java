@@ -36,7 +36,6 @@ public class Chambre {
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
-        this.listeCommodites = new ArrayList<Commodite>();
     }
 
     public Chambre() {
@@ -51,7 +50,7 @@ public class Chambre {
 
     //Chaque fonction est un get et un set de nos attributs de la classe
 
-    public int getIdChambre(){return this.c_idChambre;}
+    public int getIdChambre(){return c_idChambre;}
 
     public void setIdChambre(int idChambre){ this.c_idChambre=idChambre;}
 

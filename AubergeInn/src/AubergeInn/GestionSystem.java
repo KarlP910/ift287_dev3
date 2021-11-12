@@ -38,7 +38,7 @@ public class GestionSystem {
         //**************************************************************************
         //TODO
         //TODO
-        this.setGestionChambre(new GestionChambre(this.chambres, this.reservations,this.commodites));
+        this.setGestionChambre(new GestionChambre(chambres,reservations,commodites));
         this.setGestionClient(new GestionClient(this.clients, this.reservations));
         this.setGestionCommodite(new GestionCommodite(this.commodites, this.reservations));
         this.setGestionReservation(new GestionReservation(this.reservations, this.chambres, this.clients));

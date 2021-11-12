@@ -35,6 +35,7 @@ public class Chambre {
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
+        listeCommodites=new ArrayList<Commodite>();
     }
 
     public Chambre() {
@@ -80,7 +81,8 @@ public class Chambre {
         return c_datePret;
     }
 
-    public void inclureCommodite(Commodite commodite) {
+    public void inclureCommodite(Commodite commodite){
+        listeCommodites=new ArrayList<Commodite>();
         listeCommodites.add(commodite);
     }
     public void enleverCommodite(Commodite commodite) {

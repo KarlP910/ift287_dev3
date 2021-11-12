@@ -52,8 +52,8 @@ public class Commodites {
      */
     public Commodite getCommodite(int idCommodite)
             throws SQLException{
-        this.stmtExiste.setParameter("idCommodite",idCommodite);
-        List<Commodite> commodites = this.stmtExiste.getResultList();
+        stmtExiste.setParameter("idCommodite",idCommodite);
+        List<Commodite> commodites = stmtExiste.getResultList();
         if(!commodites.isEmpty())
         {
             return commodites.get(0);
@@ -72,9 +72,5 @@ public class Commodites {
         cx.getConnection().persist(commodite);
         return commodite;
 
-    }
-    public void supprimerCommodite(Commodite commodite) throws SQLException
-    {
-        cx.getConnection().remove(commodite);
     }
 }

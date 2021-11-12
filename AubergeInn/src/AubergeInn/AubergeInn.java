@@ -195,10 +195,10 @@ public class AubergeInn
                 // Ajoute une commodite
                 // *********************
                 else if (command.equals("ajouterCommodite")) {
-                    int idCommodite = readInt(tokenizer);
-                    String description = readString(tokenizer);
-                    float surplus_prix = readfloat(tokenizer);
-                    gestionSystem.getGestionCommodite().ajouterCommodite(idCommodite,description,surplus_prix);
+                    int idCommodite = this.readInt(tokenizer);
+                    String description = this.readString(tokenizer);
+                    float surplus_prix = this.readfloat(tokenizer);
+                    this.gestionSystem.getGestionCommodite().ajouterCommodite(idCommodite,description,surplus_prix);
 
                 }
                 // *********************

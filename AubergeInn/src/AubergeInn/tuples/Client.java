@@ -26,10 +26,10 @@ public class Client {
 
     public Client(int idClient, String prenom, String nom, int age){
 
-        m_idClient=idClient;
-        m_prenom=prenom;
-        m_nom = nom;
-        m_age = age;
+        this.m_idClient=idClient;
+        this.m_prenom=prenom;
+        this.m_nom = nom;
+        this.m_age = age;
 
     }
 

@@ -7,6 +7,7 @@ public class Commodite {
 
     @Id
     @GeneratedValue
+    private long c_id;
     private int m_idCommodite;
     private String m_description;
     private Float m_surplus_prix;
@@ -14,14 +15,16 @@ public class Commodite {
 
     //Peut etre une relation one to many
 
-    public Commodite(){
+
+
+    public Commodite(int idCommodite, String description, Float surplus_prix){
+        this.m_idCommodite = idCommodite;
+        this.m_description = description;
+        this.m_surplus_prix = surplus_prix;
 
     }
 
-    public Commodite(int idCommodite, String description, Float surplus_prix){
-        m_idCommodite = idCommodite;
-        m_description = description;
-        m_surplus_prix = surplus_prix;
+    public Commodite(){
 
     }
 

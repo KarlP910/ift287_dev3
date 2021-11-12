@@ -26,22 +26,22 @@ public class GestionCommodite {
             throws SQLException, IFT287Exception,Exception
     {
         try{
-            cx.demarreTransaction();
+            this.cx.demarreTransaction();
             Commodite c=new Commodite(idCommodite,description,surplus_prix);
             //Vérifie si la commodite est déjà dans la base de données
-            if(commodites.existe(idCommodite))
+            if(this.commodites.existe(idCommodite))
                 throw new IFT287Exception("La commodite: "+idCommodite +" est deja inclus");
 
 
             //Ajoute le client dans la base de données
-            commodites.ajouterCommodite(c);
+            this.commodites.ajouterCommodite(c);
 
             //Commit
-            cx.commit();
+            this.cx.commit();
         }
         catch (Exception e)
         {
-            cx.rollback();
+            this.cx.rollback();
             throw e;
         }
     }

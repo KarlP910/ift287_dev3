@@ -40,7 +40,7 @@ public class Commodites {
      */
     public boolean existe(int idCommodite) throws SQLException
     {
-        stmtExiste.setParameter(1, idCommodite);
+        stmtExiste.setParameter("idCommodite", idCommodite);
         return !stmtExiste.getResultList().isEmpty();
     }
 
@@ -52,8 +52,8 @@ public class Commodites {
      */
     public Commodite getCommodite(int idCommodite)
             throws SQLException{
-        stmtExiste.setParameter(1,idCommodite);
-        List<Commodite> commodites = stmtExiste.getResultList();
+        this.stmtExiste.setParameter("idCommodite",idCommodite);
+        List<Commodite> commodites = this.stmtExiste.getResultList();
         if(!commodites.isEmpty())
         {
             return commodites.get(0);

@@ -55,15 +55,15 @@ public class GestionClient {
     {
         try{
             cx.demarreTransaction();
-            Client clients= this.clients.getClient(idClient);
+            Client client= clients.getClient(idClient);
             //Vérifie si le client est déjà dans la base de données
             if(!this.clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" n'existe pas.");
             //if(client.get PROBLEME POTENTIEL DE BD
-            if(reserv.getReservationClient(clients) != null){
+            if(reserv.getReservationClient(client) != null){
                 throw new IFT287Exception("Le client "+idClient+" a encore des réservations.");
             }
-            this.clients.supprimerClient(clients);
+            clients.supprimerClient(client);
             //Commit
             cx.commit();
         }

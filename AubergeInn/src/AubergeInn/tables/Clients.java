@@ -113,8 +113,8 @@ public class Clients {
      */
     public Client getClient(int idClient) throws SQLException
     {
-        stmtExiste.setParameter(1, idClient);
-        List<Client> clients = stmtExiste.getResultList();
+        this.stmtExiste.setParameter("idClient", idClient);
+        List<Client> clients = this.stmtExiste.getResultList();
         if(!clients.isEmpty())
         {
             return clients.get(0);

@@ -10,6 +10,7 @@ import AubergeInn.tuples.TupleService;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -204,14 +205,13 @@ public class GestionChambre {
     }
 
 */
-    public void afficherChambresLibres(Date date) throws SQLException, IFT287Exception, Exception {
+    public void afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
+
 
         cx.demarreTransaction();
 
         List<Chambre> c = chambres.afficherChambreLibre();
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        calendar.add(GregorianCalendar.DATE, -1);
+        Calendar calendar = Calendar.getInstance();
         for (Chambre ci : c) {
             if (ci.getLouer() != null) {
                 if (ci.getDateLouer().before(calendar.getTime())) {
@@ -221,6 +221,8 @@ public class GestionChambre {
         }
 
         cx.commit();
+
+
 
         /*
         try

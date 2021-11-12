@@ -42,7 +42,7 @@ public class Chambres {
         this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
         //TODO
-        this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.c_idChambre = :idChambre", Chambre.class);
+        this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.idReservation is null", Chambre.class);
      
 
 

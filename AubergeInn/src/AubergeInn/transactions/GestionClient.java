@@ -50,7 +50,7 @@ public class GestionClient {
     /**
      * Suppression d'un client de la base de données si le client existe et que le client n'a plus de réservation
      */
-    public void supprimerClient(int idClient )
+    public void supprimerClient(int idClient)
             throws SQLException,IFT287Exception,Exception
     {
         try{

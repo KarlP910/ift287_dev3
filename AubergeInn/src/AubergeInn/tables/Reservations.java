@@ -33,12 +33,20 @@ public class Reservations {
         return cx;
     }
 
-
+/*
     public boolean existe(Clients clients, Chambres chambres) throws SQLException
     {
 
         stmtExiste.setParameter("1", chambres);
         stmtExiste.setParameter("2", clients);
+        return !stmtExiste.getResultList().isEmpty();
+    }
+
+
+ */
+    public boolean existe(int idReservation)
+    {
+        stmtExiste.setParameter("idReservation", idReservation);
         return !stmtExiste.getResultList().isEmpty();
     }
 
@@ -51,9 +59,9 @@ public class Reservations {
     public Reservation getReservation(int idChambre, Date debut, Date fin)throws SQLException
     {
 
-        stmtExisteReservation.setParameter(1, idChambre);
-        stmtExisteReservation.setParameter(2, debut);
-        stmtExisteReservation.setParameter(3, fin);
+        stmtExisteReservation.setParameter("idChambre", idChambre);
+        stmtExisteReservation.setParameter("debut", debut);
+        stmtExisteReservation.setParameter("fin", fin);
         List<Reservation> reservations = stmtExisteReservation.getResultList();
         if(!reservations.isEmpty())
         {
@@ -67,7 +75,7 @@ public class Reservations {
      */
     public List<Reservation> getReservationChambre(Chambre chambre) throws SQLException
     {
-        stmtExisteChambre.setParameter(1, chambre);
+        stmtExisteChambre.setParameter("chambre", chambre);
         List<Reservation> reservations = stmtExisteChambre.getResultList();
         if(!reservations.isEmpty())
         {
@@ -80,7 +88,7 @@ public class Reservations {
      */
     public List<Reservation> getReservationClient(Client clients) throws SQLException
     {
-        stmtExisteClient.setParameter(1, clients);
+        stmtExisteClient.setParameter("clients", clients);
         List<Reservation> reservations = stmtExisteClient.getResultList();
         if(!reservations.isEmpty())
         {

@@ -2,7 +2,11 @@ package AubergeInn.tuples;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Entity
@@ -31,7 +35,6 @@ public class Chambre {
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
-        this.listeCommodites = null;
     }
 
     public Chambre() {
@@ -83,5 +86,6 @@ public class Chambre {
     public void enleverCommodite(Commodite commodite) {
         listeCommodites.remove(commodite);
     }
+
 
 }

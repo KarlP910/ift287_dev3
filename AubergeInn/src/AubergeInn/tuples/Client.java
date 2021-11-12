@@ -20,9 +20,6 @@ public class Client {
     // Manque un One to many avec chambre ?
 
 
-    public Client(){
-
-    }
 
     public Client(int idClient, String prenom, String nom, int age){
 
@@ -30,6 +27,10 @@ public class Client {
         this.m_prenom=prenom;
         this.m_nom = nom;
         this.m_age = age;
+
+    }
+
+    public Client() {
 
     }
 

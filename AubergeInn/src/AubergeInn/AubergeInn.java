@@ -154,19 +154,19 @@ public class AubergeInn
                 // *********************
                 if (command.equals("ajouterClient")) {
                     // Lecture des parametres
-                    int idClient = readInt(tokenizer);
-                    String prenom = readString(tokenizer);
-                    String nom = readString(tokenizer);
-                    int age = readInt(tokenizer);
-                    gestionSystem.getGestionClient().ajoutClient(idClient,prenom,nom,age);
+                    int idClient = this.readInt(tokenizer);
+                    String prenom = this.readString(tokenizer);
+                    String nom = this.readString(tokenizer);
+                    int age = this.readInt(tokenizer);
+                    this.gestionSystem.getGestionClient().ajoutClient(idClient,prenom,nom,age);
 
                 }
                 // *********************
                 // Supprime un client
                 // *********************
                 else if (command.equals("supprimerClient")) {
-                    int idClient = readInt(tokenizer);
-                    gestionSystem.getGestionClient().supprimerClient(idClient);
+                    int idClient = this.readInt(tokenizer);
+                    this.gestionSystem.getGestionClient().supprimerClient(idClient);
 
                 }
                 // *********************
@@ -226,8 +226,8 @@ public class AubergeInn
                 else if (command.equals("afficherChambresLibres")) {
                     //TODO
 
-                    Date dateCourante = readDate(tokenizer);
-                    gestionSystem.getGestionChambre().afficherChambresLibres(dateCourante);
+                    //Date dateCourante = readDate(tokenizer);
+                    gestionSystem.getGestionChambre().afficherChambresLibres();
 
                 //    gestionSystem.getGestionReservation().afficherChambreVide();
 
@@ -257,7 +257,11 @@ public class AubergeInn
                     int idClient = readInt(tokenizer);
                     Client client = gestionSystem.getGestionClient().getClient(idClient);
                     //il faut aujouter ;les autres attributs de clients
+                    System.out.println(client.getIdClient());
+                    System.out.println(client.getPrenom());
                     System.out.println(client.getNom());
+                    System.out.println(client.getAge());
+
                     //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
 
 

@@ -22,11 +22,7 @@ public class Chambre {
     @OneToMany
     private ArrayList<Commodite> listeCommodites;
 
-    // PAS SUR DU TOUT
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Reservation idReservation;
 
-    private Date c_datePret;
 
 
     //public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base, ArrayList<Commodite> listeCommodites)

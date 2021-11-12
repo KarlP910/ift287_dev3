@@ -41,25 +41,11 @@ public class Chambres {
 
         this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
+      //  this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.idReservation is null", Chambre.class);
 
 
 
 
-        /*
-        stmtExiste =cx.getConnection().prepareStatement(
-                "select idChambre, nom_chambre, type_lit,prix_base,idCommodite from chambre where idChambre = ?");
-        stmtInsert =cx.getConnection().prepareStatement(
-                "insert into chambre(idChambre,nom_chambre, type_lit, prix_base,idCommodite) "+ " values(?,?,?,?,null)");
-        stmtUpdate=cx.getConnection().prepareStatement(
-                "update chambre set idCommodite = ? where idchambre= ?"); //inclure une commodité
-        stmtDelete=cx.getConnection().prepareStatement(
-                "delete from chambre where idChambre = ?"); //delete une chambre
-        stmtUpdateCommodite=cx.getConnection().prepareStatement(
-                "update chambre set idcommodite=null where idchambre=? AND idcommodite=?"); //delete une chambre
-        stmtSelectAll = cx.getConnection()
-                .prepareStatement("select * from Chambre");
-
-         */
     }
 
 

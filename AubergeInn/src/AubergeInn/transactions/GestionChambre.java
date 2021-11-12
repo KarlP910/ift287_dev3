@@ -132,6 +132,23 @@ public class GestionChambre {
 
     }
 
+    public void afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
+
+
+        cx.demarreTransaction();
+
+        List<Chambre> c = chambres.afficherChambreLibre();
+        Calendar calendar = Calendar.getInstance();
+        for (Chambre ci : c) {
+            //if (ci.getLouer() == null) {
+                System.out.println(ci.toString());
+            }
+
+
+      //  }
+        cx.commit();
+    }
+
     /*
         try{
             if(chambres.existe(idChambre)){

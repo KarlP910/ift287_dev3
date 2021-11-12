@@ -75,9 +75,9 @@ public class GestionChambre {
             if (!this.chambres.supprimerChambre(chambre))
                 throw new IFT287Exception("Chambre" + idChambre + "inexistant");
 
-            else {
-            this.cx.commit();
-            }
+            chambres.supprimerChambre(chambre);
+           cx.commit();
+
         } catch (Exception e) {
             this.cx.rollback();
             throw e;

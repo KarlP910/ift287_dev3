@@ -36,19 +36,19 @@ public class GestionChambre {
 
         try {
 
-            cx.demarreTransaction();
+            this.cx.demarreTransaction();
 
             Chambre chambre = new Chambre(idChambre, nom_chambre, type_lit, prix_base);
 
-            if (chambres.existe(idChambre))
+            if (this.chambres.existe(idChambre))
                 throw new IFT287Exception("La chambre existe déjà: " + idChambre);
             //chambre.ajouterChambre(idChambre,nom_chambre,type_lit,prix_base);
 
-            chambres.ajouterChambre(chambre);
+            this.chambres.ajouterChambre(chambre);
 
-            cx.commit();
+            this.cx.commit();
         } catch (Exception e) {
-            cx.rollback();
+            this.cx.rollback();
             throw e;
         }
     }
@@ -60,23 +60,25 @@ public class GestionChambre {
             throws SQLException, IFT287Exception, Exception {
         try {
 
-            cx.demarreTransaction();
+            this.cx.demarreTransaction();
 
             Chambre chambre = chambres.getChambre(idChambre);
             if (chambre == null)
-                throw new IFT287Exception("La chambre n'existe pas: " + idChambre);
-            if (!chambres.existe(idChambre))
-                throw new IFT287Exception("La chambre n'existe pas: " + idChambre);
-            if (reserv.getReservationChambre(chambre) != null) {
+                throw new IFT287Exception("La chambre n'existe pas 1: " + idChambre);
+            if (!this.chambres.existe(idChambre))
+                throw new IFT287Exception("La chambre n'existe pas 2: " + idChambre);
+            if (this.reserv.getReservationChambre(chambre) != null) {
                 throw new IFT287Exception("La chambre " + idChambre + " a encore des réservations.");
             }
 
-            if (!chambres.supprimerChambre(chambre))
+            if (!this.chambres.supprimerChambre(chambre))
                 throw new IFT287Exception("Chambre" + idChambre + "inexistant");
 
-            cx.commit();
+            else {
+            this.cx.commit();
+            }
         } catch (Exception e) {
-            cx.rollback();
+            this.cx.rollback();
             throw e;
         }
     }

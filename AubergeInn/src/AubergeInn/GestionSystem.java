@@ -27,21 +27,21 @@ public class GestionSystem {
     public GestionSystem(String serveur, String bd, String user, String password) throws SQLException, IFT287Exception {
 
 
-        cx = new Connexion(serveur,bd,user,password);
-        chambres = new Chambres(cx);
-        clients = new Clients(cx);
-        commodites = new Commodites(cx);
-        reservations = new Reservations(cx);
+        this.cx = new Connexion(serveur,bd,user,password);
+        this.chambres = new Chambres(this.cx);
+        this.clients = new Clients(this.cx);
+        this.commodites = new Commodites(this.cx);
+        this.reservations = new Reservations(this.cx);
 
         // Verifier les arguments passer dans les setter, argument bidon pour l'instant
         //**********************************************************************
         //**************************************************************************
         //TODO
         //TODO
-        setGestionChambre(new GestionChambre(chambres, reservations,commodites));
-        setGestionClient(new GestionClient(clients, reservations));
-        setGestionCommodite(new GestionCommodite(commodites, reservations));
-        setGestionReservation(new GestionReservation(reservations, chambres, clients));
+        this.setGestionChambre(new GestionChambre(this.chambres, this.reservations,this.commodites));
+        this.setGestionClient(new GestionClient(this.clients, this.reservations));
+        this.setGestionCommodite(new GestionCommodite(this.commodites, this.reservations));
+        this.setGestionReservation(new GestionReservation(this.reservations, this.chambres, this.clients));
 
     }
 

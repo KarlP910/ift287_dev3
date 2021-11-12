@@ -33,16 +33,16 @@ public class Chambres {
     public Chambres(Connexion cx) {
 
         this.cx = cx;
-        stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
+        this.stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
 
        // stmtUpdateCommodite = cx.getConnection().createQuery("select l from Chambre l where l.c_idCommodite = :Commodite", Chambre.class);
 
-        stmtSelectAll = cx.getConnection().createQuery("select l from Chambre l", Chambre.class);
+        this.stmtSelectAll = cx.getConnection().createQuery("select l from Chambre l", Chambre.class);
 
-        stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
+        this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
         //TODO
-        stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.c_idChambre = :idChambre", Chambre.class);
+        this.stmtAfficherChambreLibre = cx.getConnection().createQuery("select c from Chambre c where c.c_idChambre = :idChambre", Chambre.class);
      
 
 
@@ -70,7 +70,7 @@ public class Chambres {
      */
     public Connexion getConnexion()
     {
-        return cx;
+        return this.cx;
     }
 
 
@@ -89,7 +89,7 @@ public class Chambres {
         return reservationExiste;
 
          */
-        stmtExiste.setParameter("idChambre", idChambre);
+        this.stmtExiste.setParameter("idChambre", idChambre);
         return !stmtExiste.getResultList().isEmpty();
 
     }
@@ -124,10 +124,12 @@ public class Chambres {
 
         if(chambre != null)
         {
-            cx.getConnection().remove(chambre);
+            this.cx.getConnection().remove(chambre);
             return true;
         }
         return false;
+
+
 
     }
     /** A faire
@@ -176,8 +178,11 @@ public class Chambres {
      */
     public Chambre getChambre(int idChambre) throws SQLException {
 
-        stmtExiste.setParameter("idChambre", idChambre);
-        List<Chambre> chambres = stmtExiste.getResultList();
+        this.stmtExiste.setParameter("idChambre", idChambre);
+        List<Chambre> chambres = this.stmtExiste.getResultList();
+        return !chambres.isEmpty() ? (Chambre)chambres.get(0) : null;
+        /*
+
         if(!chambres.isEmpty())
         {
             return chambres.get(0);
@@ -186,6 +191,8 @@ public class Chambres {
         {
             return null;
         }
+
+         */
         /*
         stmtExiste.setInt(1, idChambre);
         ResultSet rset = stmtExiste.executeQuery();

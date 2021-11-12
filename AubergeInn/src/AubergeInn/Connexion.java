@@ -45,21 +45,21 @@ public class Connexion
     {
         if (serveur.equals("local"))
         {
-            emf = Persistence.createEntityManagerFactory(bd);
+            this.emf = Persistence.createEntityManagerFactory(bd);
         }
         else if (serveur.equals("dinf"))
         {
             Map<String, String> properties = new HashMap<String, String>();
             properties.put("javax.persistence.jdbc.user", user);
             properties.put("javax.persistence.jdbc.password", pass);
-            emf = Persistence.createEntityManagerFactory("AubergeInn.odb",properties);
+            this.emf = Persistence.createEntityManagerFactory("AubergeInn.odb",properties);
         }
         else
         {
             throw new IFT287Exception("Serveur inconnu");
         }
 
-        em = emf.createEntityManager();
+        this.em = this.emf.createEntityManager();
 
         System.out.println("Ouverture de la connexion :\n"
                 + "Connecté sur la BD ObjectDB "
@@ -71,8 +71,8 @@ public class Connexion
      */
     public void fermer()
     {
-        em.close();
-        emf.close();
+        this.em.close();
+        this.emf.close();
         System.out.println("Connexion fermée");
     }
 
@@ -81,7 +81,7 @@ public class Connexion
      */
     public void commit()
     {
-        em.getTransaction().commit();
+        this.em.getTransaction().commit();
     }
 
     /**
@@ -89,7 +89,7 @@ public class Connexion
      */
     public void demarreTransaction()
     {
-        em.getTransaction().begin();
+        this.em.getTransaction().begin();
     }
 
     /**
@@ -97,7 +97,7 @@ public class Connexion
      */
     public void rollback()
     {
-        em.getTransaction().rollback();
+        this.em.getTransaction().rollback();
     }
 
     /**
@@ -105,7 +105,7 @@ public class Connexion
      */
     public EntityManager getConnection()
     {
-        return em;
+        return this.em;
     }
 
 }

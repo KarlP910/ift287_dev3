@@ -135,12 +135,13 @@ public class AubergeInn
     /**
      * Decodage et traitement d'une transaction
      */
-    static void executerTransaction(String transaction) throws Exception, IFT287Exception
+    private void executerTransaction(String transaction) throws Exception, IFT287Exception
     {
         try {
             System.out.print(transaction);
             // Decoupage de la transaction en mots
             StringTokenizer tokenizer = new StringTokenizer(transaction, " ");
+
             if (tokenizer.hasMoreTokens()) {
                 String command = tokenizer.nextToken();
                 // Vous devez remplacer la chaine "commande1" et "commande2" par
@@ -172,20 +173,22 @@ public class AubergeInn
                 // Ajoute une chambre
                 // *********************
                 else if (command.equals("ajouterChambre")) {
-                    int idChambre = readInt(tokenizer);
-                    String nomChambre = readString(tokenizer);
-                    String typeLit = readString(tokenizer);
-                    float prix = readfloat(tokenizer);
-                    gestionSystem.getGestionChambre().ajouterChambre(idChambre,nomChambre,typeLit,prix);
+                    int idChambre = this.readInt(tokenizer);
+                    String nomChambre = this.readString(tokenizer);
+                    String typeLit = this.readString(tokenizer);
+                    float prix = this.readfloat(tokenizer);
+                    this.gestionSystem.getGestionChambre().ajouterChambre(idChambre,nomChambre,typeLit,prix);
                    // gestionSystem.getGestionChambre().ajouterChambre(idChambre);
 
                 }
                 // *********************
                 // Supprime une chambre
                 // *********************
+
+
                 else if (command.equals("supprimerChambre")) {
-                    int idChambre = readInt(tokenizer);
-                    gestionSystem.getGestionChambre().supprimerChambre(idChambre);
+                    int idChambre = this.readInt(tokenizer);
+                    this.gestionSystem.getGestionChambre().supprimerChambre(idChambre);
 
                 }
                 // *********************
@@ -346,13 +349,14 @@ public class AubergeInn
                 }
 
         }
-        catch (Exception e)
+
+        catch (IFT287Exception e)
         {
             System.out.println(" " + e.toString());
             // Ce rollback est ici seulement pour vous aider et éviter des problèmes lors de la correction
             // automatique. En théorie, il ne sert à rien et ne devrait pas apparaître ici dans un programme
             // fini et fonctionnel sans bogues.
-            cx.rollback();
+           // cx.rollback();
         }
 
 

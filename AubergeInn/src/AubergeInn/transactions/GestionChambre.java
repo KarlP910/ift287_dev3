@@ -88,18 +88,22 @@ public class GestionChambre {
      * À faire
      */
 
-    /*
-    public Commodite afficherChambreCommodite(int idChambre)
+
+    public List<Commodite> afficherChambreCommodite(int idChambre)
             throws SQLException, IFT287Exception, Exception {
 
-        cx.demarreTransaction();
+
 
 
         try {
+            cx.demarreTransaction();
 
-
+            Chambre chambre=chambres.getChambre(idChambre);
+            if(chambre==null){
+                throw new IFT287Exception("La chambre n'existe pas");
+            }
             cx.commit();
-            return commodite.getCommodite(idChambre);
+            return  chambre.getAllCommodite();
 
 
         } catch (Exception e) {
@@ -109,7 +113,7 @@ public class GestionChambre {
     }
 
 
-     */
+
 
     /**
      * Affiche les chambres avec leurs informations et avec les commodités offertes

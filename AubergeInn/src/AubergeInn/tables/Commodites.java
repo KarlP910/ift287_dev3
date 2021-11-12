@@ -65,8 +65,4 @@ public class Commodites {
         return commodite;
 
     }
-    public void supprimerCommodite(Commodite commodite) throws SQLException
-    {
-        cx.getConnection().remove(commodite);
-    }
 }

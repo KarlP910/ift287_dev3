@@ -81,19 +81,11 @@ public class Chambres {
 
     public boolean existe(int idChambre) throws SQLException
     {
-        /*
-        stmtExiste.setInt(1, idChambre);
-        ResultSet rset = stmtExiste.executeQuery();
-        boolean reservationExiste = rset.next();
-        rset.close();
-        return reservationExiste;
 
-         */
         this.stmtExiste.setParameter("idChambre", idChambre);
         return !stmtExiste.getResultList().isEmpty();
 
     }
-
 
     /**
      * Ajoute une chambre au système
@@ -105,15 +97,6 @@ public class Chambres {
         cx.getConnection().persist(chambre);
 
         return chambre;
-        /*
-        stmtInsert.setInt(1,idChambre);
-        stmtInsert.setString(2,nom_chambre);
-        stmtInsert.setString(3,type_lit);
-        stmtInsert.setFloat(4,prix_base);
-        stmtInsert.executeUpdate();
-
-
-         */
     }
 
     /**
@@ -129,8 +112,6 @@ public class Chambres {
         }
         return false;
 
-
-
     }
     /** A faire
      * Affiche une chambre
@@ -142,28 +123,6 @@ public class Chambres {
         //stmtAfficherChambre.setParameter("idChambre", idChambre);
         List<Chambre> chambres = stmtAfficherChambre.getResultList();
         return chambres;
-
-
-        /*
-        stmtExiste.setInt(1,idChambre);
-        ResultSet rset=stmtExiste.executeQuery();
-
-        if (rset.next())
-        {
-            // idChambre, nom_chambre, type_lit,prix_base,idCommodite
-            TupleChambre chambre= new TupleChambre(rset.getInt("idChambre"),
-                    rset.getString("nom_chambre"),
-                    rset.getString("type_lit"),
-                    rset.getFloat("prix_base"),
-                    rset.getInt("idCommodite"));
-
-            return  chambre;
-        }
-        else {
-            return null;
-        }
-
-         */
 
     }
     public List<Chambre> afficherChambreLibre()
@@ -181,36 +140,7 @@ public class Chambres {
         this.stmtExiste.setParameter("idChambre", idChambre);
         List<Chambre> chambres = this.stmtExiste.getResultList();
         return !chambres.isEmpty() ? (Chambre)chambres.get(0) : null;
-        /*
 
-        if(!chambres.isEmpty())
-        {
-            return chambres.get(0);
-        }
-        else
-        {
-            return null;
-        }
-
-         */
-        /*
-        stmtExiste.setInt(1, idChambre);
-        ResultSet rset = stmtExiste.executeQuery();
-        if (rset.next())
-        {
-            TupleChambre tupleChambre = new TupleChambre();
-            tupleChambre.setIdChambre(rset.getInt(1));
-            tupleChambre.setNom_chambre(rset.getString(2));
-            tupleChambre.setType_lit(rset.getString(3));
-            tupleChambre.setPrix_base(rset.getFloat(4));
-            tupleChambre.setIdCommodite(rset.getInt(5));
-            rset.close();
-            return tupleChambre;
-        }
-        else
-            return null;
-
-         */
     }
 
 

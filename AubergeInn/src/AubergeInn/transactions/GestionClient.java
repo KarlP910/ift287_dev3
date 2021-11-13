@@ -11,23 +11,19 @@ import java.sql.SQLException;
 
 public class GestionClient {
 
-    private Connexion cx;
-    private Clients clients;
-    private Reservations reserv;
-
+    private final Connexion cx;
+    private final Clients clients;
 
     //Constructeur de GestionClient
-    public GestionClient(Clients clients, Reservations reserv){
+    public GestionClient(Clients clients){
         this.clients = clients;
-        this.reserv=reserv;
         this.cx= clients.getConnexion();
     }
 
     /**
-     * Ajout d'un nouveau membre dans la base de données. S'il existe déjà, une
+     * Ajout d'un nouveau client dans la base de données. S'il existe déjà, une
      * exception est levée.
      */
-
     //Ajoute un client a la db
     public void ajoutClient(int idClient,String prenom,String nom,int age)
     throws SQLException,IFT287Exception,Exception
@@ -64,10 +60,7 @@ public class GestionClient {
             //Vérifie si le client est déjà dans la base de données
             if(!clients.existe(idClient))
                 throw new IFT287Exception("Le client: "+idClient +" n'existe pas.");
-            //if(client.get PROBLEME POTENTIEL DE BD
-           // if(reserv.getReservationClient(client) != null){
-          //      throw new IFT287Exception("Le client "+idClient+" a encore des réservations.");
-          //  }
+
             clients.supprimerClient(client);
             //Commit
             cx.commit();
@@ -79,10 +72,8 @@ public class GestionClient {
         }
     }
 
-
-
     /**
-     * Retourne toutes les informations du client qui ont des réservations en cours et antérieure
+     * Retourne toutes les informations du client
      */
     public Client getClient(int idClient) throws SQLException, IFT287Exception, Exception
     {

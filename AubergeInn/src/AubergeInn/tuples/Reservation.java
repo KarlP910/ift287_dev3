@@ -1,11 +1,7 @@
 package AubergeInn.tuples;
 
-import AubergeInn.tables.Chambres;
-import AubergeInn.tables.Clients;
-
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 public class Reservation {
@@ -25,8 +21,6 @@ public class Reservation {
     }
     //Constructeur de Reservation
     public Reservation(Client clients, Chambre chambres, Date date_debut, Date date_fin){
-
-
         m_clients = clients;
         m_chambres = chambres;
         m_date_debut=date_debut;

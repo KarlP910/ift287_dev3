@@ -11,10 +11,10 @@ import java.util.*;
 
 public class GestionChambre {
 
-    private Connexion cx;
-    private Chambres chambres;
-    private Reservations reserv;
-    private Commodites commodites;
+    private final Connexion cx;
+    private final Chambres chambres;
+    private final Reservations reserv;
+    private final Commodites commodites;
 
     //Constructeur de Gestion Chambre
     public GestionChambre(Chambres chambres, Reservations reserv,Commodites commodites) {
@@ -32,13 +32,12 @@ public class GestionChambre {
 
         try {
 
-            this.cx.demarreTransaction();
+            cx.demarreTransaction();
 
             Chambre chambre = new Chambre(idChambre, nom_chambre, type_lit, prix_base);
 
             if (this.chambres.existe(idChambre))
                 throw new IFT287Exception("La chambre existe déjà: " + idChambre);
-            //chambre.ajouterChambre(idChambre,nom_chambre,type_lit,prix_base);
 
             this.chambres.ajouterChambre(chambre);
 
@@ -56,22 +55,22 @@ public class GestionChambre {
             throws SQLException, IFT287Exception, Exception {
         try {
 
-            this.cx.demarreTransaction();
+            cx.demarreTransaction();
 
             Chambre chambre = chambres.getChambre(idChambre);
             if (chambre == null)
                 throw new IFT287Exception("La chambre n'existe pas 1: " + idChambre);
-            if (!this.chambres.existe(idChambre))
+            if (!chambres.existe(idChambre))
                 throw new IFT287Exception("La chambre n'existe pas 2: " + idChambre);
-            if (this.reserv.getReservationChambre(chambre) != null) {
+            if (reserv.getReservationChambre(chambre) != null) {
                 throw new IFT287Exception("La chambre " + idChambre + " a encore des réservations.");
             }
 
-            if (!this.chambres.supprimerChambre(chambre))
+            if (!chambres.supprimerChambre(chambre))
                 throw new IFT287Exception("Chambre" + idChambre + "inexistant");
 
             chambres.supprimerChambre(chambre);
-           cx.commit();
+            cx.commit();
 
         } catch (Exception e) {
             this.cx.rollback();
@@ -80,10 +79,8 @@ public class GestionChambre {
     }
 
     /**
-     * Affiche les commodites dune chambre
+     * Affiche les commodites d'une chambre
      */
-
-
     public List<Commodite> afficherChambreCommodite(int idChambre)
             throws SQLException, IFT287Exception, Exception {
 
@@ -98,15 +95,11 @@ public class GestionChambre {
             cx.commit();
             return  listeCommodites;
 
-
         } catch (Exception e) {
             cx.rollback();
             throw e;
         }
     }
-
-
-
 
     /**
      * Affiche les chambres avec leurs informations
@@ -127,8 +120,6 @@ public class GestionChambre {
             cx.rollback();
             throw e;
         }
-
-
     }
 
     //Affiche les chambres libres (retourne la liste)
@@ -136,25 +127,16 @@ public class GestionChambre {
 
         try {
 
-
         cx.demarreTransaction();
 
         List<Chambre> listeChambre = chambres.afficherChambreLibre();
         List<Chambre> listBonneChambre=new LinkedList<Chambre>();
-        Date calendar = Calendar.getInstance().getTime();
         for (Chambre ci : listeChambre) {
-            //if (ci.getLouer() == null) {
-         //   if(!reserv.getReservationChambre(ci).getDate_debut().after(calendar) && !reserv.getReservationChambre(ci).getDate_fin().before(calendar)){
-         //       listBonneChambre.add(ci);
-        //    }
-            // if(reserv.getReservationChambre(ci).getDate_debut()!=null || reserv.getReservationChambre(ci).getDate_fin()!=null){
              if(reserv.getReservationChambre(ci)==null)
                 listBonneChambre.add(ci);
-         //   }
+
         }
 
-
-        //  }
         cx.commit();
         return listBonneChambre;
     }catch (Exception e){
@@ -163,7 +145,7 @@ public class GestionChambre {
         }
     }
 
-    // Inclue une commodite a une chambre
+    // Inclue une commodite à une chambre
     public void inclureCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
 
@@ -185,7 +167,6 @@ public class GestionChambre {
         }
     }
 
-
     // Enleve une commodite a une chambre
     public void enleverCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
@@ -197,81 +178,6 @@ public class GestionChambre {
             chambres.enleverCommodite(chambre, comm);
             cx.commit();
         } catch (Exception e) {
-            cx.rollback();
-            throw e;
-        }
-    }
-
-
-   /* public float prixServices(int idChambre, GestionCommodite gCommodites) throws SQLException, IFT287Exception, Exception {
-        try {
-            cx.demarreTransaction();
-            float total = 0;
-            Chambre c =chambres.getChambre(idChambre);
-         //   ArrayList<Integer> listeCommoditeId = service.getService(idChambre);
-            List<Commodite> listeCommoditeId = c.
-         /*
-            if(listeCommoditeId.isEmpty()){
-           return 0;
-
-            }
-            for (int i=0;i< listeCommoditeId.size();i++) {
-
-                total += gCommodites.getPrix(i);
-            }
-
-
-            cx.commit();
-            return total;
-        } catch (Exception e) {
-            cx.rollback();
-            throw e;
-        }
-        */
-   // }
-
-
-
-
-
-        /*
-        try
-        {
-            List<Chambre> listeChambres = chambres.getAll();
-            // code venant de stack overflow https://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
-            ArrayList<Integer> listeChambreReserveId = reserv.getAllChambre(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-
-            for(Integer id : listeChambreReserveId)
-            {
-                Chambre c = getTupleChambre(id);
-                listeChambres.remove(c);
-            }
-
-            cx.commit();
-            return listeChambres;
-        }
-        catch(Exception e)
-        {
-            cx.rollback();
-            throw e;
-        }
-
-         */
-
-    public Chambre getEntiteChambre(int idChambre) throws SQLException, IFT287Exception, Exception
-    {
-        try
-        {
-            cx.demarreTransaction();
-            Chambre chambre = chambres.getChambre(idChambre);
-           // if(chambre == null)
-          //      throw new IFT287Exception("La chambre n'existe pas.");
-
-            cx.commit();
-            return chambre;
-        }
-        catch(Exception e)
-        {
             cx.rollback();
             throw e;
         }

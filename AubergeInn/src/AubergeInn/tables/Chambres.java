@@ -10,21 +10,16 @@ import java.util.List;
 
 public class Chambres {
 
-    private Connexion cx;
+    private final Connexion cx;
 
-    private TypedQuery<Chambre> stmtExiste;
-    private TypedQuery<Chambre> stmtSelectAll;
-    private TypedQuery<Chambre> stmtAfficherChambre;
-
-
+    private final TypedQuery<Chambre> stmtExiste;
+    private final TypedQuery<Chambre> stmtAfficherChambre;
 
     //Constructeur de Chambres
     public Chambres(Connexion cx) {
 
         this.cx = cx;
         this.stmtExiste = cx.getConnection().createQuery("select l from Chambre l where l.c_idChambre = :idChambre", Chambre.class);
-
-        this.stmtSelectAll = cx.getConnection().createQuery("select l from Chambre l", Chambre.class);
 
         this.stmtAfficherChambre = cx.getConnection().createQuery("select c from Chambre c", Chambre.class);
 
@@ -72,7 +67,6 @@ public class Chambres {
             return true;
         }
         return false;
-
     }
 
     // Affichage chambre Libre
@@ -83,7 +77,7 @@ public class Chambres {
         return chambres;
     }
 
-    /**  A faire
+    /**
      * Lecture d'une chambre
      */
     public Chambre getChambre(int idChambre) {
@@ -97,21 +91,16 @@ public class Chambres {
         {
             return null;
         }
-
-
     }
     //Retourne les commodites de chambre
     public List<Commodite> getAllCommodites(Chambre c) throws SQLException
     {
-
        return c.getAllCommodite();
     }
-
-  // Vu qu'on est dans le modèle object une chambre a un attribut de commdité, alors c'est tout a fait normal d'avoir commodité pour un object chambre
-
+    // Vu qu'on est dans le modèle object une chambre a un attribut de commdité, alors c'est tout a fait normal d'avoir commodité pour un object chambre
+    // Inclus une commodité dans une chambre
     public void inclureCommodite(Chambre chambre, Commodite commodite) throws SQLException {
         chambre.inclureCommodite(commodite);
-
     }
 
     // enleve la commodite dune chambre

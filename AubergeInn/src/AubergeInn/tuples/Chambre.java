@@ -1,7 +1,6 @@
 package AubergeInn.tuples;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,35 +52,33 @@ public class Chambre {
 
     public float getPrix_base(){ return c_prix_base;}
 
-
+    //Prix d'une chambre de base et le prix de leur commodité
     public float prixTotal(){
-
         float total=0;
-
         for(Commodite c:this.listeCommodites){
             if(listeCommodites==null){
                 break;
             }
             total+=c.getSurplus_prix();
         }
-
         return total+c_prix_base;
     }
 
     public void setPrix_base(Float prix_base){ this.c_prix_base=prix_base;}
 
+    //Inclure une commodité à une chambre
     public void inclureCommodite(Commodite commodite) {
         this.listeCommodites = new LinkedList<Commodite>();
         listeCommodites.add(commodite);
 
     }
+    //Enlever une commodité à une chambre
     public void enleverCommodite(Commodite commodite) {
 
         listeCommodites.remove(commodite);
     }
+    //Permet d'obtenir toutes les commodités d'une chambre
     public List<Commodite> getAllCommodite(){
         return listeCommodites;
     }
-
-
 }

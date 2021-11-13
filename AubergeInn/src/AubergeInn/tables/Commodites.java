@@ -3,21 +3,13 @@ package AubergeInn.tables;
 import AubergeInn.Connexion;
 import AubergeInn.tuples.Commodite;
 
-import javax.lang.model.element.TypeParameterElement;
 import javax.persistence.TypedQuery;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Commodites {
 
-
-    private TypedQuery<Commodite> stmtExiste;
-    private TypedQuery<Commodite> stmtUpdate;
-    private TypedQuery<Commodite> stmtDelete;
+    private final TypedQuery<Commodite> stmtExiste;
     private final Connexion cx;
 
     //Constructeur de Commodites
@@ -34,12 +26,10 @@ public class Commodites {
         return !stmtExiste.getResultList().isEmpty();
     }
 
-
     //Établie la connexion
     public Connexion getConnexion(){
         return cx;
     }
-
 
     /**
      * Lecture d'une commodite

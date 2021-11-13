@@ -4,12 +4,14 @@
 
 package AubergeInn;
 
-import AubergeInn.tuples.*;
+import AubergeInn.tuples.Chambre;
+import AubergeInn.tuples.Client;
+import AubergeInn.tuples.Commodite;
+import AubergeInn.tuples.Reservation;
 
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.sql.*;
@@ -84,14 +86,11 @@ public class AubergeInn
             aubergeInnInstance.setFaireEcho(!lectureAuClavier);
             aubergeInnInstance.traiterTransactions(reader);
 
-
         }
         catch (Exception e)
             {
                 e.printStackTrace(System.out);
             }
-
-
         }
 
     public void setFaireEcho(boolean echo)
@@ -125,13 +124,8 @@ public class AubergeInn
             System.out.println();
             transaction = lireTransaction(reader);
 
-
-
-
-
         }
     }
-
 
     /**
      * Decodage et traitement d'une transaction
@@ -210,7 +204,6 @@ public class AubergeInn
                     int idCommodite = readInt(tokenizer);
                     gestionSystem.getGestionChambre().inclureCommodite(idChambre,idCommodite);
 
-
                 }
                 // *********************
                 // Enlève une commodité
@@ -254,7 +247,6 @@ public class AubergeInn
                     int idClient = readInt(tokenizer);
                     Client client = gestionSystem.getGestionClient().getClient(idClient);
 
-                    //il faut aujouter ;les autres attributs de clients
                     System.out.println("\nidClient\tPrenom\tNom\tAge");
                     System.out.println(client.getIdClient()+"\t"+client.getPrenom()+"\t"+client.getNom()+"\t"+client.getAge());
                     List<Reservation> listreserv=gestionSystem.getGestionReservation().listReservationClient(client);
@@ -279,10 +271,6 @@ public class AubergeInn
                                     t.getDate_fin());
 
                         }
-                        //Faut accéder a la lsite de commodité et print ceux qui sont reliés avec la chambre
-
-
-
                     }//TODO
                 }
                 // *********************

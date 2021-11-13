@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class GestionCommodite {
 
-    private Connexion cx;
-    private Commodites commodites;
+    private final Connexion cx;
+    private final Commodites commodites;
     private Reservations reserv;
 
 
@@ -29,8 +29,9 @@ public class GestionCommodite {
             throws SQLException, IFT287Exception,Exception
     {
         try{
-            this.cx.demarreTransaction();
+            cx.demarreTransaction();
             Commodite c=new Commodite(idCommodite,description,surplus_prix);
+
             //Vérifie si la commodite est déjà dans la base de données
             if(this.commodites.existe(idCommodite))
                 throw new IFT287Exception("La commodite: "+idCommodite +" est deja inclus");
@@ -48,26 +49,4 @@ public class GestionCommodite {
             throw e;
         }
     }
-
-    // Retourne le prix d'une commodite
-    public double getPrix(int id) throws SQLException, IFT287Exception, Exception
-    {
-        try
-        {
-            cx.demarreTransaction();
-            Commodite tupleCommodite = commodites.getCommodite(id);
-            if (tupleCommodite == null)
-                throw new IFT287Exception("La commodite n'existe deja.");
-
-            Commodite commodite = commodites.getCommodite(id);
-            cx.commit();
-            return commodite.getSurplus_prix();
-        }
-        catch(Exception e)
-        {
-            cx.rollback();
-            throw e;
-        }
-    }
-
 }

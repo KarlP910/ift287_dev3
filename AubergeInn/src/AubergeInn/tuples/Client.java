@@ -14,8 +14,6 @@ public class Client {
     private String m_nom;
     private int m_age;
 
-
-
     //Constructeur de Client
     public Client(int idClient, String prenom, String nom, int age){
 

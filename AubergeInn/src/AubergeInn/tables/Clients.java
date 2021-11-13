@@ -4,30 +4,19 @@ import AubergeInn.Connexion;
 import AubergeInn.tuples.Client;
 
 import javax.persistence.TypedQuery;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class Clients {
 
-    /*
-    private final PreparedStatement stmtExiste;
-    private final PreparedStatement stmtInsert;
-   // private final PreparedStatement stmtUpdate;
-    private final PreparedStatement stmtDelete;
-    private final PreparedStatement stmtExisteReserv;
-*/
     private final Connexion cx;
-    private TypedQuery<Client> stmtExiste;
-
+    private final TypedQuery<Client> stmtExiste;
 
     //Constructeur de clients
     public Clients(Connexion cx) throws SQLException
     {
         this.cx=cx;
         stmtExiste = cx.getConnection().createQuery("select c from Client c where c.m_idClient = :idClient",Client.class);
-
     }
     //Établie la connexion
     public Connexion getConnexion(){
@@ -63,7 +52,7 @@ public class Clients {
         return false;
 
     }
-    /** A faire
+    /**
      * Lecture d'un client
      */
     public Client getClient(int idClient) throws SQLException
@@ -79,6 +68,4 @@ public class Clients {
             return null;
         }
     }
-
-
 }

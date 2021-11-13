@@ -12,24 +12,19 @@ import java.util.List;
 
 public class Reservations {
 
-    private TypedQuery<Reservation> stmtExiste;
-    private TypedQuery<Reservation> stmtExisteChambre;
-    private TypedQuery<Reservation> stmtExisteClient;
-    private TypedQuery<Reservation> stmtExisteReservation;
+    private final TypedQuery<Reservation> stmtExisteChambre;
+    private final TypedQuery<Reservation> stmtExisteClient;
+    private final TypedQuery<Reservation> stmtExisteReservation;
     private final Connexion cx;
 
 
         //Constructeur de reservations
         public Reservations(Connexion cx) throws SQLException
         {
-            //pt verif sur reserv
             this.cx=cx;
-            stmtExiste = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_clients = : client", Reservation.class);
             stmtExisteChambre = cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre", Reservation.class);
             stmtExisteClient = cx.getConnection().createQuery("select r from Reservation r where r.m_clients = :client", Reservation.class);
             stmtExisteReservation=cx.getConnection().createQuery("select r from Reservation r where r.m_chambres = :chambre and r.m_date_debut <= :Date and r.m_date_fin > :Date", Reservation.class);
-
-
         }
 
     // Établie la connexion
@@ -80,7 +75,6 @@ public class Reservations {
 
         return reservations;
     }
-
 }
 
 

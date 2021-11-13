@@ -11,17 +11,12 @@ public class Commodite {
     private String m_description;
     private Float m_surplus_prix;
 
-
-
-
     //Constructeur de Commodite
     public Commodite(int idCommodite, String description, Float surplus_prix){
         this.m_idCommodite = idCommodite;
         this.m_description = description;
         this.m_surplus_prix = surplus_prix;
-
     }
-
     public Commodite(){
 
     }

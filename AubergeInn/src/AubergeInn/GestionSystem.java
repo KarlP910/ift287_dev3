@@ -34,7 +34,7 @@ public class GestionSystem {
         this.reservations = new Reservations(this.cx);
 
         this.setGestionChambre(new GestionChambre(chambres,reservations,commodites));
-        this.setGestionClient(new GestionClient(this.clients, this.reservations));
+        this.setGestionClient(new GestionClient(this.clients));
         this.setGestionCommodite(new GestionCommodite(this.commodites, this.reservations));
         this.setGestionReservation(new GestionReservation(this.reservations, this.chambres, this.clients));
 
@@ -83,5 +83,4 @@ public class GestionSystem {
 
         this.gestionCommodite = gestionCommodite;
     }
-    public Commodites getTableCommodite() { return commodites; }
 }

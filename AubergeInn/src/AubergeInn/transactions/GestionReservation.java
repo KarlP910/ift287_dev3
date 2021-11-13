@@ -19,7 +19,6 @@ public class GestionReservation {
     private Reservations reservation;
     private Clients clients;
     private Chambres chambres;
-    private Client Client;
 
 
     //Constructeur de GestionReservation
@@ -34,18 +33,15 @@ public class GestionReservation {
         this.cx=reservation.getConnexion();
     }
 
-
     // Retourne la liste des reservations d'un client
     public List<Reservation> listReservationClient(Client c)
             throws SQLException, IFT287Exception,Exception{
         try {
             cx.demarreTransaction();
 
-
             List<Reservation> reserv=reservation.listeReservationClient(c);
             cx.commit();
             return reserv;
-
         }
         catch(Exception e){
             cx.rollback();
@@ -54,7 +50,7 @@ public class GestionReservation {
     }
 
     /**
-     * Réserve une chambre à un client avec une date de debut et une date de fin (pt a mettre dans chambre)
+     * Réserve une chambre à un client avec une date de debut et une date de fin
      */
     public void reserver(int idClient, int idChambre, Date dateDebut, Date dateFin)
             throws SQLException, IFT287Exception,Exception
@@ -74,7 +70,6 @@ public class GestionReservation {
                 throw new IFT287Exception("Il y a un conflit avec une autre reservation");
 
             Reservation r = new Reservation(client,chambre,dateDebut,dateFin);
-           // this.reservation.reserver(idClient,idChambre,dateDebut,dateFin);
 
             reservation.reserver(r);
             //Commit
@@ -86,7 +81,4 @@ public class GestionReservation {
             throw e;
         }
     }
-
-
-
 }

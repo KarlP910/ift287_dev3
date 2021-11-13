@@ -12,10 +12,9 @@ public class Commodite {
     private Float m_surplus_prix;
 
 
-    //Peut etre une relation one to many
 
 
-
+    //Constructeur de Commodite
     public Commodite(int idCommodite, String description, Float surplus_prix){
         this.m_idCommodite = idCommodite;
         this.m_description = description;
@@ -28,8 +27,8 @@ public class Commodite {
     }
 
     /***
-     * SUREMENT ENLVER LES SETTERS
-     * @return
+     *
+     * Divers fonctions, getters, setters pour les paramètres de Client
      */
 
     //Chaque fonction est un get et un set de nos attributs de la classe

@@ -20,6 +20,7 @@ public class Commodites {
     private TypedQuery<Commodite> stmtDelete;
     private final Connexion cx;
 
+    //Constructeur de Commodites
     public Commodites(Connexion cx) throws SQLException {
         this.cx=cx;
         stmtExiste=cx.getConnection().createQuery("select c from Commodite c where c.m_idCommodite = :idCommodite",Commodite.class);
@@ -33,9 +34,13 @@ public class Commodites {
         return !stmtExiste.getResultList().isEmpty();
     }
 
+
+    //Établie la connexion
     public Connexion getConnexion(){
         return cx;
     }
+
+
     /**
      * Lecture d'une commodite
      */

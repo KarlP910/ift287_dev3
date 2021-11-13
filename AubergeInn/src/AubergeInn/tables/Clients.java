@@ -22,14 +22,14 @@ public class Clients {
     private TypedQuery<Client> stmtExiste;
 
 
-
+    //Constructeur de clients
     public Clients(Connexion cx) throws SQLException
     {
         this.cx=cx;
         stmtExiste = cx.getConnection().createQuery("select c from Client c where c.m_idClient = :idClient",Client.class);
 
     }
-
+    //Établie la connexion
     public Connexion getConnexion(){
         return cx;
     }

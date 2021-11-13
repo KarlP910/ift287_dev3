@@ -18,6 +18,8 @@ public class Reservations {
     private TypedQuery<Reservation> stmtExisteReservation;
     private final Connexion cx;
 
+
+        //Constructeur de reservations
         public Reservations(Connexion cx) throws SQLException
         {
             //pt verif sur reserv
@@ -29,15 +31,20 @@ public class Reservations {
 
 
         }
+
+    // Établie la connexion
     public Connexion getConnexion(){
         return cx;
     }
 
+    //Reserve une chambre
     public void reserver(Reservation r) throws SQLException
     {
         /* Ajout de la reservation. */
       cx.getConnection().persist(r);
     }
+
+    // Getter de reservation
     public Reservation getReservation(Chambre c,Date date_debut, Date date_fin)throws SQLException
     {
         stmtExisteReservation.setParameter("chambre", c);
@@ -65,6 +72,7 @@ public class Reservations {
         return null;
     }
 
+    // Retourne la liste des reservations dun client
     public List<Reservation> listeReservationClient(Client c) throws SQLException
     {
         stmtExisteClient.setParameter("client", c);

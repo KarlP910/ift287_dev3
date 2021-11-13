@@ -16,6 +16,9 @@ public class Chambres {
     private TypedQuery<Chambre> stmtSelectAll;
     private TypedQuery<Chambre> stmtAfficherChambre;
 
+
+
+    //Constructeur de Chambres
     public Chambres(Connexion cx) {
 
         this.cx = cx;
@@ -72,7 +75,7 @@ public class Chambres {
 
     }
 
-
+    // Affichage chambre Libre
     public List<Chambre> afficherChambreLibre()
             throws SQLException {
         //stmtAfficherChambre.setParameter("idChambre", idChambre);
@@ -97,7 +100,7 @@ public class Chambres {
 
 
     }
-
+    //Retourne les commodites de chambre
     public List<Commodite> getAllCommodites(Chambre c) throws SQLException
     {
 
@@ -111,7 +114,7 @@ public class Chambres {
 
     }
 
-    // A faire
+    // enleve la commodite dune chambre
     public void enleverCommodite(Chambre chambre, Commodite commodite) throws SQLException {
         chambre.enleverCommodite(commodite);
     }

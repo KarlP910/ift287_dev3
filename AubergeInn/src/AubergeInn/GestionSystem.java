@@ -23,7 +23,7 @@ public class GestionSystem {
     private GestionReservation gestionReservation;
 
 
-
+    //Constructeur de GestionSystem
     public GestionSystem(String serveur, String bd, String user, String password) throws SQLException, IFT287Exception {
 
 
@@ -33,22 +33,22 @@ public class GestionSystem {
         this.commodites = new Commodites(this.cx);
         this.reservations = new Reservations(this.cx);
 
-        // Verifier les arguments passer dans les setter, argument bidon pour l'instant
-        //**********************************************************************
-        //**************************************************************************
-        //TODO
-        //TODO
         this.setGestionChambre(new GestionChambre(chambres,reservations,commodites));
         this.setGestionClient(new GestionClient(this.clients, this.reservations));
         this.setGestionCommodite(new GestionCommodite(this.commodites, this.reservations));
         this.setGestionReservation(new GestionReservation(this.reservations, this.chambres, this.clients));
 
     }
-
+    //fermer la connexion
     public void fermer() throws  SQLException {
 
         cx.fermer();
     }
+
+    /***
+     *  Divers fonctions, getters, setters pour les paramètres de GestionSystem et getGestionCommodite
+     * @return
+     */
 
     public GestionChambre getGestionChambre() {
         return gestionChambre;

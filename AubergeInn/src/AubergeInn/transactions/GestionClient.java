@@ -15,15 +15,20 @@ public class GestionClient {
     private Clients clients;
     private Reservations reserv;
 
+
+    //Constructeur de GestionClient
     public GestionClient(Clients clients, Reservations reserv){
         this.clients = clients;
         this.reserv=reserv;
         this.cx= clients.getConnexion();
     }
+
     /**
      * Ajout d'un nouveau membre dans la base de données. S'il existe déjà, une
      * exception est levée.
      */
+
+    //Ajoute un client a la db
     public void ajoutClient(int idClient,String prenom,String nom,int age)
     throws SQLException,IFT287Exception,Exception
     {
@@ -77,7 +82,7 @@ public class GestionClient {
 
 
     /**
-     * Affiche toutes les informations du client qui ont des réservations en cours et antérieure
+     * Retourne toutes les informations du client qui ont des réservations en cours et antérieure
      */
     public Client getClient(int idClient) throws SQLException, IFT287Exception, Exception
     {

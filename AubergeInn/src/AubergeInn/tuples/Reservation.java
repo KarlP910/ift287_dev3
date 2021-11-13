@@ -23,6 +23,7 @@ public class Reservation {
     public Reservation(){
 
     }
+    //Constructeur de Reservation
     public Reservation(Client clients, Chambre chambres, Date date_debut, Date date_fin){
 
 
@@ -32,8 +33,8 @@ public class Reservation {
         m_date_fin=date_fin;
     }
 
-    //Chaque fonction est un get et un set de nos attributs de la classe
 
+    //Divers fonctions, getters, setters pour les paramètres de Client
 
     public Chambre getChambre(){ return m_chambres;}
 

@@ -14,11 +14,14 @@ public class GestionCommodite {
     private Commodites commodites;
     private Reservations reserv;
 
+
+    //Constructeur dde Gestion Commodite
     public GestionCommodite(Commodites commodites, Reservations reserv){
         this.commodites = commodites;
         this.reserv=reserv;
         this.cx= commodites.getConnexion();
     }
+
     /**
      * Ajoute une commodité au système
      */
@@ -45,6 +48,8 @@ public class GestionCommodite {
             throw e;
         }
     }
+
+    // Retourne le prix d'une commodite
     public double getPrix(int id) throws SQLException, IFT287Exception, Exception
     {
         try

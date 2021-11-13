@@ -22,6 +22,7 @@ public class GestionReservation {
     private Client Client;
 
 
+    //Constructeur de GestionReservation
     public GestionReservation(Reservations reservation, Chambres chambres, Clients clients) throws IFT287Exception{
 
         if (chambres.getConnexion() != clients.getConnexion() || reservation.getConnexion() != clients.getConnexion())
@@ -34,7 +35,7 @@ public class GestionReservation {
     }
 
 
-
+    // Retourne la liste des reservations d'un client
     public List<Reservation> listReservationClient(Client c)
             throws SQLException, IFT287Exception,Exception{
         try {

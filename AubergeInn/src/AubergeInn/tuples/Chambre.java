@@ -19,6 +19,7 @@ public class Chambre {
     @OneToMany
     private List<Commodite> listeCommodites;
 
+    //Constructeur de Chambre
     public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base) {
         c_idChambre = idChambre;
         this.c_type_lit = type_lit;
@@ -32,7 +33,7 @@ public class Chambre {
     }
 
     /***
-     * DAPRES MOI ICI ON VA POUVOIR ENLEVER TOUTE LES SETTERS
+     *  Divers fonctions, getters, setters pour les paramètres de chambre et inclureCommodite | enleverCommodite | getAllCommodite
      * @return
      */
 

@@ -14,10 +14,9 @@ public class Client {
     private String m_nom;
     private int m_age;
 
-    // Manque un One to many avec chambre ?
 
 
-
+    //Constructeur de Client
     public Client(int idClient, String prenom, String nom, int age){
 
         this.m_idClient=idClient;
@@ -32,8 +31,7 @@ public class Client {
     }
 
     /***
-     * PAS MAL SUR QUON VA POUVOIR ENLEVER LES SETTER ICI AUSSI
-     * @return
+     * Divers fonctions, getters, setters pour les paramètres de Client
      */
 
     //Chaque fonction est un get et un set de nos attributs de la classe

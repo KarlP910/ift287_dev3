@@ -16,7 +16,7 @@ public class GestionChambre {
     private Reservations reserv;
     private Commodites commodites;
 
-
+    //Constructeur de Gestion Chambre
     public GestionChambre(Chambres chambres, Reservations reserv,Commodites commodites) {
         this.chambres = chambres;
         this.reserv = reserv;
@@ -80,7 +80,7 @@ public class GestionChambre {
     }
 
     /**
-     * À faire
+     * Affiche les commodites dune chambre
      */
 
 
@@ -109,7 +109,7 @@ public class GestionChambre {
 
 
     /**
-     * Affiche les chambres avec leurs informations et avec les commodités offertes
+     * Affiche les chambres avec leurs informations
      *
      * @return
      */
@@ -131,6 +131,7 @@ public class GestionChambre {
 
     }
 
+    //Affiche les chambres libres (retourne la liste)
     public List<Chambre> afficherChambresLibres() throws SQLException, IFT287Exception, Exception {
 
         try {
@@ -162,6 +163,7 @@ public class GestionChambre {
         }
     }
 
+    // Inclue une commodite a une chambre
     public void inclureCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
 
@@ -183,6 +185,8 @@ public class GestionChambre {
         }
     }
 
+
+    // Enleve une commodite a une chambre
     public void enleverCommodite(int idChambre, int idCommodite) throws SQLException, IFT287Exception, Exception {
         try {
             cx.demarreTransaction();

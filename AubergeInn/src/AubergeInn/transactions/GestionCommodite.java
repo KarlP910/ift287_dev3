@@ -49,6 +49,7 @@ public class GestionCommodite {
     {
         try
         {
+            cx.demarreTransaction();
             Commodite tupleCommodite = commodites.getCommodite(id);
             if (tupleCommodite == null)
                 throw new IFT287Exception("La commodite n'existe deja.");

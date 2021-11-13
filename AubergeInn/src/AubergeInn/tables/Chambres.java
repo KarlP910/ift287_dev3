@@ -108,6 +108,7 @@ public class Chambres {
 
     public void inclureCommodite(Chambre chambre, Commodite commodite) throws SQLException {
         chambre.inclureCommodite(commodite);
+
     }
 
     // A faire

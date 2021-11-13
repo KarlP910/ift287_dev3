@@ -7,10 +7,7 @@ import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Commodite;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GestionChambre {
 
@@ -201,23 +198,34 @@ public class GestionChambre {
         }
     }
 
-/*
-    public double prixServices(int idChambre, GestionCommodite gestionCommodite) throws SQLException, IFT287Exception, Exception {
+
+   /* public float prixServices(int idChambre, GestionCommodite gCommodites) throws SQLException, IFT287Exception, Exception {
         try {
-            double total = 0;
-            ArrayList<Integer> listeCommoditeId = service.getService(idChambre);
-            for (int id : listeCommoditeId) {
-                total += gestionCommodite.getPrix(id);
+            cx.demarreTransaction();
+            float total = 0;
+            Chambre c =chambres.getChambre(idChambre);
+         //   ArrayList<Integer> listeCommoditeId = service.getService(idChambre);
+            List<Commodite> listeCommoditeId = c.
+         /*
+            if(listeCommoditeId.isEmpty()){
+           return 0;
+
             }
+            for (int i=0;i< listeCommoditeId.size();i++) {
+
+                total += gCommodites.getPrix(i);
+            }
+
+
             cx.commit();
             return total;
         } catch (Exception e) {
             cx.rollback();
             throw e;
         }
-    }
+        */
+   // }
 
-*/
 
 
 

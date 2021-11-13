@@ -2,6 +2,7 @@ package AubergeInn.tuples;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -16,18 +17,18 @@ public class Chambre {
     private float c_prix_base;
 
     @OneToMany
-    private ArrayList<Commodite> listeCommodites;
+    private List<Commodite> listeCommodites;
 
     public Chambre(int idChambre, String nom_chambre, String type_lit, float prix_base) {
         c_idChambre = idChambre;
         this.c_type_lit = type_lit;
         this.c_nom_chambre = nom_chambre;
         this.c_prix_base = prix_base;
-        listeCommodites=new ArrayList<Commodite>();
+        listeCommodites= new LinkedList<Commodite>();
     }
 
     public Chambre() {
-        listeCommodites=new ArrayList<Commodite>();
+        listeCommodites= new LinkedList<Commodite>();
     }
 
     /***
@@ -49,13 +50,29 @@ public class Chambre {
 
     public void setNom_chambre(String nom_chambre){ this.c_nom_chambre=nom_chambre;}
 
-    public float getPrix_base(){ return this.c_prix_base;}
+    public float getPrix_base(){ return c_prix_base;}
+
+
+    public float prixTotal(){
+
+        float total=0;
+
+        for(Commodite c:this.listeCommodites){
+            if(listeCommodites==null){
+                break;
+            }
+            total+=c.getSurplus_prix();
+        }
+
+        return total+c_prix_base;
+    }
 
     public void setPrix_base(Float prix_base){ this.c_prix_base=prix_base;}
 
     public void inclureCommodite(Commodite commodite) {
-        this.listeCommodites = new ArrayList<Commodite>();
+        this.listeCommodites = new LinkedList<Commodite>();
         listeCommodites.add(commodite);
+
     }
     public void enleverCommodite(Commodite commodite) {
 
